@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D262529B-34DF-4158-99A2-DD7E5F82ED01}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tx.ToolBox</RootNamespace>
+    <AssemblyName>Tx.ToolBox</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\DispatcherEx.cs" />
+    <Compile Include="Helpers\DisposableEx.cs" />
+    <Compile Include="Helpers\EnumEx.cs" />
+    <Compile Include="Helpers\Flag.cs" />
+    <Compile Include="Helpers\ListEx.cs" />
+    <Compile Include="Messaging\DelegateListener.cs" />
+    <Compile Include="Messaging\IListener.cs" />
+    <Compile Include="Messaging\IMessage.cs" />
+    <Compile Include="Messaging\IMessenger.cs" />
+    <Compile Include="Messaging\IListenerCollection.cs" />
+    <Compile Include="Messaging\ListenerCollection.cs" />
+    <Compile Include="Messaging\MessageBase.cs" />
+    <Compile Include="Messaging\Messenger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Converters\BoolConverterBase.cs" />
+    <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\ConverterBase.cs" />
+    <Compile Include="UI\Converters\EnumConverterBase.cs" />
+    <Compile Include="UI\Converters\StringConverterBase.cs" />
+    <Compile Include="UI\Mvvm\Command.cs" />
+    <Compile Include="UI\Mvvm\CommandT.cs" />
+    <Compile Include="UI\Mvvm\ObservableBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collections\" />
+    <Folder Include="UI\ToolBar\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Tpl.Dataflow">
+      <Version>4.5.24</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
