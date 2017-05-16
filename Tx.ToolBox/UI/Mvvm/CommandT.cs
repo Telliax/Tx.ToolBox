@@ -2,7 +2,7 @@
 
 namespace Tx.ToolBox.UI.Mvvm
 {
-    class Command<TParameter> : Command
+    public class Command<TParameter> : Command
     {
         public Command(Action<TParameter> action, Func<TParameter, bool> canExecute = null)
             : base(action == null ? (Action<object>)null : p => action((TParameter)p), 

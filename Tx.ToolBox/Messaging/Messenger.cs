@@ -7,30 +7,21 @@ using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Messaging
 {
+    /// <summary>
+    /// TPL.Dataflow-based implementation of IMessenger.
+    /// Guarantees that messages are processed with a degree of parallelism of 1 in FIFO order.
+    /// </summary>
     public class Messenger : IMessenger, IDisposable
     {
         public Messenger(int bufferSize = 1000)
         {
             if (bufferSize < 1) throw new ArgumentException("Buffer size can not be less that 1.", nameof(bufferSize));
 
-            var options = new ExecutionDataflowBlockOptions
+            _pipeLine = new ActionBlock<Job>((Action<Job>)Handle, new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = 1,
                 BoundedCapacity = bufferSize,
-            };
-            _pipeLineStart = new TransformBlock<IMessage, IMessage>(m =>
-                {
-                    IListenerCollection listeners;
-                    lock (_subscribers)
-                    {
-                        _subscribers.TryGetValue(m.GetType(), out listeners);
-                    }
-                    listeners?.Handle(m);
-                    return m;
-                }, options);
-
-            _pipeLineEnd = new ActionBlock<IMessage>(m => { });
-            _pipeLineStart.LinkTo(_pipeLineEnd);
+            });
         }
 
         public void Dispose()
@@ -45,17 +36,17 @@ namespace Tx.ToolBox.Messaging
         {
             if (listener == null) throw new ArgumentNullException(nameof(listener));
 
-            var subscribtions = listener.GetType()
+            var subscriptions = listener.GetType()
                                         .GetInterfaces()
                                         .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IListener<>))
                                         .Select(listenerType => listenerType.GetGenericArguments()[0])
                                         .Select(messageType => Subscribe(messageType, listener))
                                         .ToArray();
-            if (!subscribtions.Any())
+            if (!subscriptions.Any())
                 throw new InvalidOperationException(
                     $"{listener.GetType().Name} does not implement IListener<T>. Use IMessenger.Subscribe<TMessage> instead.");
 
-            return subscribtions.Combine();
+            return subscriptions.Combine();
         }
 
         public IDisposable Subscribe<TMessage>(Action<TMessage> handler) where TMessage : IMessage
@@ -65,21 +56,21 @@ namespace Tx.ToolBox.Messaging
             return Subscribe(typeof(TMessage), new DelegateListener<TMessage>(handler));
         }
 
-        public void Publish(IMessage message)
+        public async Task<bool> PublishAsync(IMessage message)
         {
-            PublishAsync(message).Wait();
-        }
-
-        public async Task PublishAsync(IMessage message)
-        {
-            await _pipeLine.SendAsync(message);
+            if (message == null) throw new ArgumentNullException(nameof(message));
+            var job = new Job(message);
+            var enqueued = await _pipeLine.SendAsync(job);
+            if (!enqueued)
+            {
+                job.Result.SetResult(false);
+            }
+            return await job.Result.Task;
         }
 
         private readonly Dictionary<Type, IListenerCollection> _subscribers = new Dictionary<Type, IListenerCollection>();
-        private readonly TransformBlock<IMessage, IMessage> _pipeLine;
+        private readonly ActionBlock<Job> _pipeLine;
         private bool _disposed;
-        private ISourceBlock<IMessage> _pipeLineStart;
-        private ITargetBlock<IMessage> _pipeLineEnd;
 
         private IDisposable Subscribe(Type messageType, object listener)
         {
@@ -96,6 +87,34 @@ namespace Tx.ToolBox.Messaging
             }
 
             return list.Add(listener);
+        }
+
+        private void Handle(Job job)
+        {
+            IListenerCollection listeners;
+            lock (_subscribers)
+            {
+                _subscribers.TryGetValue(job.Message.GetType(), out listeners);
+            }
+            try
+            {
+                listeners?.Handle(job.Message);
+                job.Result.SetResult(true);
+            }
+            catch (Exception ex)
+            {
+                job.Result.SetException(ex);
+            }
+        }
+
+        private class Job
+        {
+            public Job(IMessage message)
+            {
+                Message = message;
+            }
+            public IMessage Message { get; }
+            public TaskCompletionSource<bool> Result { get; } = new TaskCompletionSource<bool>();
         }
     }
 }

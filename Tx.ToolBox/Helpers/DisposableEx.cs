@@ -6,13 +6,26 @@ using System.Threading.Tasks;
 
 namespace Tx.ToolBox.Helpers
 {
+    /// <summary>
+    /// A bunch of helper methods realted to IDisposable interface
+    /// </summary>
     public static class DisposableEx
     {
+        /// <summary>
+        /// Creates a disposable object that executes given action when dispose is called.
+        /// </summary>
+        /// <param name="action">Action to call on dispose</param>
+        /// <returns>Disposable wrapper.</returns>
         public static IDisposable AsDisposable(this Action action)
         {
             return new DisposableHandle(action);
         }
 
+        /// <summary>
+        /// Creates a disposable object that disposes every item in given collection.
+        /// </summary>
+        /// <param name="disposables">Collection of disposable objects.</param>
+        /// <returns>Disposable wrapper.</returns>
         public static IDisposable Combine(this IEnumerable<IDisposable> disposables)
         {
             return new DisposableHandle(disposables.Select<IDisposable, Action>(x => x.Dispose).ToArray());

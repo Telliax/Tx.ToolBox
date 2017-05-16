@@ -6,7 +6,6 @@ using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Messaging
 {
-
     class ListenerCollection<TMessage> : IListenerCollection where TMessage : IMessage
     {
         public IDisposable Add(object listener)

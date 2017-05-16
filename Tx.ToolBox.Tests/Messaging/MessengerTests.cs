@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using Moq;
 using NUnit.Framework;
 using Tx.ToolBox.Messaging;
+using System.Threading.Tasks;
 
 namespace Tx.ToolBox.Tests.Messaging
 {
@@ -40,58 +40,48 @@ namespace Tx.ToolBox.Tests.Messaging
         }
 
         [Test]
-        public void Publish_OnMessageSent_MessageHandledByApproperiateSubscribers()
+        public void Publish_OnNullMessage_Throws()
+        {
+            var messenger = new Messenger();
+            Assert.Throws<AggregateException>(() => messenger.PublishAsync(null).Wait());
+        }
+
+        [Test]
+        public async Task FacadeTest_OnMessageSent_MessageHandledByApproperiateSubscribers()
         {
             var messenger = new Messenger();
             var listener1 = Mock.Of<IListener<MessageA>>();
-            var listener2 = Mock.Of<IListener<MessageA>>();
+            var listener2 = Mock.Of<Action<MessageA>>();
+            var listener3 = Mock.Of<IListener<MessageB>>();
             messenger.Subscribe(listener1);
             messenger.Subscribe(listener2);
-            messenger.Publish(new MessageA());
-            Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
-            Mock.Get(listener2).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
+            messenger.Subscribe(listener3);
+            await messenger.PublishAsync(new MessageA());
+            await messenger.PublishAsync(new MessageB());
+            await messenger.PublishAsync(new MessageC());
+            await messenger.PublishAsync(new MessageA());
+            Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Exactly(2));
+            Mock.Get(listener2).Verify(l => l(It.IsAny<MessageA>()), Times.Exactly(2));
+            Mock.Get(listener3).Verify(l => l.Handle(It.IsAny<MessageB>()), Times.Once);
         }
 
         [Test]
-        public void Publish_OnMessageSent_MessageIgnoredByOtherSubscribers1()
-        {
-            var messenger = new Messenger();
-            var listener1 = Mock.Of<IListener<MessageA>>();
-            var listener2 = Mock.Of<IListener<MessageB>>();
-            messenger.Subscribe(listener1);
-            messenger.Subscribe(listener2);
-            messenger.Publish(new MessageA());
-            Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
-            Mock.Get(listener2).Verify(l => l.Handle(It.IsAny<MessageB>()), Times.Never);
-        }
-
-        [Test]
-        public void Publish_OnMessageSent_MessageIgnoredByOtherSubscribers2()
-        {
-            var messenger = new Messenger();
-            var listener1 = Mock.Of<IListener<MessageA>>();
-            messenger.Subscribe(listener1);
-            messenger.Publish(new MessageB());
-            Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Never);
-        }
-
-        [Test]
-        public void Publish_OnMessageSent_MessageIgnoredByDisposedListeners()
+        public async Task FacadeTest_OnMessageSent_MessageIgnoredByDisposedListeners()
         {
             var messenger = new Messenger();
             var listener1 = Mock.Of<IListener<MessageA>>();
             var listener2 = Mock.Of<IListener<MessageA>>();
             var subscription = messenger.Subscribe(listener1);
             messenger.Subscribe(listener2);
-            messenger.Publish(new MessageA());
+            await messenger.PublishAsync(new MessageA());
             subscription.Dispose();
-            messenger.Publish(new MessageA());
+            await messenger.PublishAsync(new MessageA());
             Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
             Mock.Get(listener2).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Exactly(2));
         }
 
         [Test]
-        public void Publish_OnMessageSent_HandledMessageIsIgnored()
+        public async Task FacadeTest_OnMessageSent_HandledMessageIsIgnored()
         {
             var messenger = new Messenger();
             var listener1 = Mock.Of<IListener<MessageA>>();
@@ -100,9 +90,36 @@ namespace Tx.ToolBox.Tests.Messaging
             var listener2 = Mock.Of<IListener<MessageA>>();
             messenger.Subscribe(listener1);
             messenger.Subscribe(listener2);
-            messenger.Publish(new MessageA());
+            await messenger.PublishAsync(new MessageA());
             Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
             Mock.Get(listener2).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Never);
         }
+
+        [Test]
+        public async Task FacadeTest_OnSubscribtionDisposedDuringHandle_RemovesListener()
+        {
+            var messenger = new Messenger();
+            var listener1 = Mock.Of<IListener<MessageA>>();
+            var listener2 = Mock.Of<IListener<MessageA>>();
+            var subscription = messenger.Subscribe(listener1);
+            Mock.Get(listener1).Setup(l => l.Handle(It.IsAny<MessageA>())).Callback<MessageA>(m => subscription.Dispose());
+            messenger.Subscribe(listener2);
+            await messenger.PublishAsync(new MessageA());
+            await messenger.PublishAsync(new MessageA());
+            Mock.Get(listener1).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Once);
+            Mock.Get(listener2).Verify(l => l.Handle(It.IsAny<MessageA>()), Times.Exactly(2));
+        }
+    }
+
+    public class MessageA : MessageBase
+    {
+    }
+
+    public class MessageB : MessageBase
+    {
+    }
+
+    public class MessageC : MessageBase
+    {
     }
 }

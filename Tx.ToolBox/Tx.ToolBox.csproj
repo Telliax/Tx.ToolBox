@@ -69,7 +69,6 @@
     <Compile Include="UI\Mvvm\ObservableBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Collections\" />
     <Folder Include="UI\ToolBar\" />
   </ItemGroup>
   <ItemGroup>
