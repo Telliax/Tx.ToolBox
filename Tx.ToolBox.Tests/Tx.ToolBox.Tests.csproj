@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\FlagTests.cs" />
     <Compile Include="Messaging\ListenerCollectionTests.cs" />
     <Compile Include="Messaging\MessengerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

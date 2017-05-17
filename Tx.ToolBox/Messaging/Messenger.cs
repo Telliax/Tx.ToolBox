@@ -19,7 +19,7 @@ namespace Tx.ToolBox.Messaging
 
             _pipeLine = new ActionBlock<Job>((Action<Job>)Handle, new ExecutionDataflowBlockOptions
             {
-                MaxDegreeOfParallelism = 1,
+                MaxDegreeOfParallelism = 1, 
                 BoundedCapacity = bufferSize,
             });
         }
@@ -28,7 +28,6 @@ namespace Tx.ToolBox.Messaging
         {
             if (_disposed) return;
             _pipeLine.Complete();
-            _pipeLine.Completion.Wait();
             _disposed = true;
         }
 
