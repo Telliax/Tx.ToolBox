@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -58,6 +61,17 @@
     <Compile Include="Messaging\ListenerCollection.cs" />
     <Compile Include="Messaging\MessageBase.cs" />
     <Compile Include="Messaging\Messenger.cs" />
+    <Compile Include="UI\Samples\EventLog.cs" />
+    <Compile Include="UI\Samples\IEventLog.cs" />
+    <Compile Include="UI\Samples\ISample.cs" />
+    <Compile Include="UI\Samples\SampleAppWindow.xaml.cs">
+      <DependentUpon>SampleAppWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Samples\SampleAppWindowModel.cs" />
+    <Compile Include="UI\Samples\SampleBase.cs" />
+    <Compile Include="UI\Samples\SampleManager.cs" />
+    <Compile Include="Windsor\CollectionFacility.cs" />
+    <Compile Include="Windsor\MessengerFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Converters\BoolConverterBase.cs" />
     <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
@@ -66,15 +80,29 @@
     <Compile Include="UI\Converters\StringConverterBase.cs" />
     <Compile Include="UI\Mvvm\Command.cs" />
     <Compile Include="UI\Mvvm\CommandT.cs" />
-    <Compile Include="UI\Mvvm\ObservableBase.cs" />
+    <Compile Include="UI\Mvvm\ViewModelBase.cs" />
+    <Compile Include="UI\Samples\SampleApp.cs" />
+    <Compile Include="UI\Samples\SampleAppInstaller.cs" />
+    <Compile Include="UI\Samples\SampleBootstrap.cs" />
+    <Compile Include="UI\Templates\AttributeTemplateSelector.cs" />
+    <Compile Include="UI\Templates\TemplateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\ToolBar\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Castle.Windsor">
+      <Version>4.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Tpl.Dataflow">
       <Version>4.5.24</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="UI\Samples\SampleAppWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

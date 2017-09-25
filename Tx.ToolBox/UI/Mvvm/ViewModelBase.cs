@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Tx.ToolBox.UI.Mvvm
 {
-    class ObservableBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
