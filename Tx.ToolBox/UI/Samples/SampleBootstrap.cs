@@ -6,7 +6,7 @@ using Tx.ToolBox.Windsor;
 
 namespace Tx.ToolBox.UI.Samples
 {
-    class SampleBootstrap : IDisposable
+    public class SampleBootstrap : IDisposable
     {
         public SampleBootstrap(string appTitle)
         {

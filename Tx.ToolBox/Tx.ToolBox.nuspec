@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Tx.ToolBox</id>
+    <version>1.0</version>
+    <title>Tx.ToolBox</title>
+    <authors>Nikita Brizhak</authors>
+    <licenseUrl>https://github.com/Telliax/Tx.ToolBox/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Telliax/Tx.ToolBox</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A bunch of useful tools made for personal use</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+</package>
