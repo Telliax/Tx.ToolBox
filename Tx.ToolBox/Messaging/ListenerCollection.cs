@@ -24,7 +24,7 @@ namespace Tx.ToolBox.Messaging
             {
                 lock (_list)
                 {
-                    if (_handleFlag.IsSet)
+                    if (_handleFlag)
                     {
                         _removedHandlers.Add(typedListener.Handle);
                     }
@@ -47,7 +47,7 @@ namespace Tx.ToolBox.Messaging
             {
                 var typedMessage = (TMessage)message;
 
-                using (_handleFlag.Set())
+                using (_handleFlag.SetTemporary())
                 {
                     Debug.WriteLine("handling");
                     foreach (var handler in _list)

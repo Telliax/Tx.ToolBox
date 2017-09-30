@@ -14,19 +14,50 @@ namespace Tx.ToolBox.Tests.Helpers
         }
 
         [Test]
-        public void Set_OnCall_IsSetReturnsTrue()
+        public void SetTemporary_OnCall_IsSetReturnsTrue()
         {
             var flag = new Flag();
-            flag.Set();
+            flag.SetTemporary();
             Assert.IsTrue(flag.IsSet);
         }
 
         [Test]
-        public void Set_OnDisposed_IsSetReturnsFalse()
+        public void SetTemporary_OnDisposed_IsSetReturnsFalse()
         {
             var flag = new Flag();
-            flag.Set().Dispose();
+            flag.SetTemporary().Dispose();
             Assert.IsFalse(flag.IsSet);
+        }
+
+        [Test]
+        public void SetTemporary_OnDisposedMultipleTimes_UnsetsOnce()
+        {
+            var flag = new Flag();
+            var handle1 = flag.SetTemporary();
+            var handle2 = flag.SetTemporary();
+            handle1.Dispose();
+            handle1.Dispose();
+            Assert.IsTrue(flag.IsSet);
+        }
+
+        [Test]
+        public void SetPermanently_OnCall_IsSetReturnsTrue()
+        {
+            var flag = new Flag();
+            flag.SetPermanently();
+            Assert.IsTrue(flag.IsSet);
+        }
+
+        [Test]
+        public void SetPermanently_CanNotBeUnset()
+        {
+            var flag = new Flag();
+            var handle1 = flag.SetTemporary();
+            flag.SetPermanently();
+            handle1.Dispose();
+            Assert.IsTrue(flag.IsSet);
+            handle1.Dispose();
+            Assert.IsTrue(flag.IsSet);
         }
 
         [TestFixture]
@@ -36,13 +67,13 @@ namespace Tx.ToolBox.Tests.Helpers
             public void OnNestedUsings_FlagResetsOnLastUsing()
             {
                 var flag = new Flag();
-                using (flag.Set())
+                using (flag.SetTemporary())
                 {
                     Assert.IsTrue(flag.IsSet);
-                    using (flag.Set())
+                    using (flag.SetTemporary())
                     {
                         Assert.IsTrue(flag.IsSet);
-                        using (flag.Set())
+                        using (flag.SetTemporary())
                         {
                             Assert.IsTrue(flag.IsSet);
                         }
