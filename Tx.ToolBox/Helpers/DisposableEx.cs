@@ -26,7 +26,7 @@ namespace Tx.ToolBox.Helpers
         /// </summary>
         /// <param name="disposables">Collection of disposable objects.</param>
         /// <returns>Disposable wrapper.</returns>
-        public static IDisposable Combine(this IEnumerable<IDisposable> disposables)
+        public static IDisposable AsDisposable(this IEnumerable<IDisposable> disposables)
         {
             return new DisposableHandle(disposables.Select<IDisposable, Action>(x => x.Dispose).ToArray());
         }

@@ -61,6 +61,11 @@
     <Compile Include="Messaging\ListenerCollection.cs" />
     <Compile Include="Messaging\MessageBase.cs" />
     <Compile Include="Messaging\Messenger.cs" />
+    <Compile Include="Settings\ISettingsContainer.cs" />
+    <Compile Include="Settings\ISettingsStorage.cs" />
+    <Compile Include="Settings\ObservableSettings.cs" />
+    <Compile Include="Settings\SettingsStorageBase.cs" />
+    <Compile Include="Settings\XmlSettingsStorage.cs" />
     <Compile Include="UI\Samples\EventLog.cs" />
     <Compile Include="UI\Samples\IEventLog.cs" />
     <Compile Include="UI\Samples\ISample.cs" />
@@ -70,6 +75,8 @@
     <Compile Include="UI\Samples\SampleAppWindowModel.cs" />
     <Compile Include="UI\Samples\SampleBase.cs" />
     <Compile Include="UI\Samples\SampleManager.cs" />
+    <Compile Include="UI\ToolBar\ITool.cs" />
+    <Compile Include="UI\ToolBar\IToolBar.cs" />
     <Compile Include="Windsor\CollectionFacility.cs" />
     <Compile Include="Windsor\MessengerFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,9 +94,7 @@
     <Compile Include="UI\Templates\AttributeTemplateSelector.cs" />
     <Compile Include="UI\Templates\TemplateAttribute.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\ToolBar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Castle.Windsor">
       <Version>4.0.0</Version>

@@ -9,7 +9,7 @@ using Castle.MicroKernel.Registration;
 
 namespace Tx.ToolBox.UI.Samples
 {
-    abstract class SampleBase : ISample
+    public abstract class SampleBase : ISample
     {
         protected SampleBase()
         {

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Tx.ToolBox</id>
-    <version>1.0</version>
+    <version>1.0.3</version>
     <title>Tx.ToolBox</title>
     <authors>Nikita Brizhak</authors>
     <licenseUrl>https://github.com/Telliax/Tx.ToolBox/blob/master/LICENSE</licenseUrl>
@@ -11,5 +11,9 @@
     <description>A bunch of useful tools made for personal use</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2017</copyright>
+	<dependencies>
+	<dependency id="Castle.Windsor" version="4.1.0"/>
+	<dependency id="Microsoft.Tpl.Dataflow" version="4.5.24"/>
+	</dependencies>
   </metadata>
 </package>

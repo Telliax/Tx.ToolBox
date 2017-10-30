@@ -15,7 +15,7 @@ namespace Tx.ToolBox.Messaging
     {
         public Messenger(int bufferSize = 1000)
         {
-            if (bufferSize < 1) throw new ArgumentException("Buffer size can not be less that 1.", nameof(bufferSize));
+            if (bufferSize < 1) throw new ArgumentException("Buffer size can not be less than 1.", nameof(bufferSize));
 
             _pipeLine = new ActionBlock<Job>((Action<Job>)Handle, new ExecutionDataflowBlockOptions
             {
@@ -45,7 +45,7 @@ namespace Tx.ToolBox.Messaging
                 throw new InvalidOperationException(
                     $"{listener.GetType().Name} does not implement IListener<T>. Use IMessenger.Subscribe<TMessage> instead.");
 
-            return subscriptions.Combine();
+            return subscriptions.AsDisposable();
         }
 
         public IDisposable Subscribe<TMessage>(Action<TMessage> handler) where TMessage : IMessage

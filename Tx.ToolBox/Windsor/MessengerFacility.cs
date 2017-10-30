@@ -15,7 +15,7 @@ namespace Tx.ToolBox.Windsor
     public class MessengerFacility : IFacility
     {
         /// <summary>
-        /// Stop message flow *before* container is disposed. Default = false;
+        /// Stop message flow *right before* container is disposed. Default = false;
         /// </summary>
         public bool DisposeMessengerOnTerminate { get; set; }
 
