@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
-using Tx.ToolBox.Messaging;
-using Tx.ToolBox.Settings;
-using Tx.ToolBox.Tests.Messaging;
+using Tx.ToolBox.Storage;
 
-namespace Tx.ToolBox.Tests.Settings
+namespace Tx.ToolBox.Tests.Storage
 {
     [TestFixture]
-    class ObservableSettiingsTests
+    class ObservableItemTests
     {
         [Test]
         public void Ctor_OnInvalidId_Throws()
         {
-            Assert.Throws<ArgumentException>(() => new ObservableSettings<object>(null));
-            Assert.Throws<ArgumentException>(() => new ObservableSettings<object>(String.Empty));
-            Assert.Throws<ArgumentException>(() => new ObservableSettings<object>("  "));
+            Assert.Throws<ArgumentException>(() => new ObservableItem<object>(null));
+            Assert.Throws<ArgumentException>(() => new ObservableItem<object>(String.Empty));
+            Assert.Throws<ArgumentException>(() => new ObservableItem<object>("  "));
         }
 
         [Test]
@@ -27,7 +21,7 @@ namespace Tx.ToolBox.Tests.Settings
         {
             object res = null;
             var value = new object();
-            using (var settings = new ObservableSettings<object>(value, "id"))
+            using (var settings = new ObservableItem<object>(value, "id"))
             using (settings.Subscribe(val => res = val))
             {
                 Assert.AreEqual(value, res);
@@ -35,15 +29,15 @@ namespace Tx.ToolBox.Tests.Settings
         }
 
         [Test]
-        public void Set_OnSettingsChanged_NewValueReceived()
+        public void Set_OnItemChanged_NewValueReceived()
         {
             object res = null;
             var value = new object();
             var value2 = new object();
-            using (var settings = new ObservableSettings<object>(value, "id"))
-            using (settings.Subscribe(val => res = val))
+            using (var item = new ObservableItem<object>(value, "id"))
+            using (item.Subscribe(val => res = val))
             {
-                settings.Set(value2);
+                item.Set(value2);
                 Assert.AreEqual(value2, res);
             }
         }
@@ -55,26 +49,26 @@ namespace Tx.ToolBox.Tests.Settings
             var value = new object();
             var value2 = new object();
             var value3 = new object();
-            using (var settings = new ObservableSettings<object>(value, "id"))
+            using (var item = new ObservableItem<object>(value, "id"))
             {
-                using (settings.Subscribe(val => res = val))
+                using (item.Subscribe(val => res = val))
                 {
-                    settings.Set(value2);
+                    item.Set(value2);
                 }
-                settings.Set(value3);
+                item.Set(value3);
                 Assert.AreEqual(value2, res);
             }
         }
 
         [Test]
-        public void Dispose_OnSettingsDisposed_Completed()
+        public void Dispose_OnItemDisposed_Completed()
         {
             var value = new object();
-            var settings = new ObservableSettings<object>(value, "id");
+            var item = new ObservableItem<object>(value, "id");
             var completed = false;
-            using (settings.Subscribe(val => { }, () => completed = true))
+            using (item.Subscribe(val => { }, () => completed = true))
             {
-                settings.Dispose();
+                item.Dispose();
                 Assert.IsTrue(completed);
             }
         }
@@ -82,20 +76,20 @@ namespace Tx.ToolBox.Tests.Settings
         [Test]
         public void Copy_OnCopy_ValueSetToOtherContainer()
         {
-            var storage = Mock.Of<ISettingsStorage>();
+            var storage = Mock.Of<IDataStorage>();
             string resultId = null;
             object resultSettings = null;
             Mock.Get(storage)
-                .Setup(c => c.SetSettings(It.IsAny<object>(), It.IsAny<string>()))
+                .Setup(c => c.Set(It.IsAny<object>(), It.IsAny<string>()))
                 .Callback<object, string>((s, i) =>
                 {
                     resultId = i;
                     resultSettings = s;
                 });
             var value = new object();
-            using (var settings = new ObservableSettings<object>(value, "id"))
+            using (var item = new ObservableItem<object>(value, "id"))
             {
-                settings.CopyTo(storage);
+                item.CopyTo(storage);
                 Assert.AreEqual("id", resultId);
                 Assert.AreEqual(value, resultSettings);
             }

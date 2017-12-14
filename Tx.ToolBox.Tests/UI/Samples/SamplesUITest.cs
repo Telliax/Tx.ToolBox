@@ -1,18 +1,15 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Tx.ToolBox.UI.Samples;
+using System.Windows.Controls;
+using System.Windows.Media;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using System.Windows.Media;
-using System.Windows.Controls;
+using NUnit.Framework;
+using Tx.ToolBox.UI.Samples;
 
-namespace Tx.ToolBox.Tests.UI
+namespace Tx.ToolBox.Tests.UI.Samples
 {
     [TestFixture, Apartment(ApartmentState.STA)]
     class SamplesUITest

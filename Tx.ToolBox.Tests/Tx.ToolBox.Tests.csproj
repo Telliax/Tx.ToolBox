@@ -46,7 +46,8 @@
     <Compile Include="Messaging\ListenerCollectionTests.cs" />
     <Compile Include="Messaging\MessengerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\ObservableSettiingsTests.cs" />
+    <Compile Include="Storage\ObservableItemTests.cs" />
+    <Compile Include="Storage\XmlStorageTests.cs" />
     <Compile Include="UI\Samples\SamplesUITest.cs" />
     <Compile Include="UI\Templates\AttributeTamplateSelectorTests.cs" />
   </ItemGroup>
@@ -75,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Storage\Test1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Storage\Test2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

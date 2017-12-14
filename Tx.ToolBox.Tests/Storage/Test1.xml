@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Storage >
+  <Item Id ="1" Type="Tx.ToolBox.Tests.Storage.TestItem, Tx.ToolBox.Tests">
+    <TestItem>
+       <Name>Boris</Name>
+       <Age>11</Age>
+    </TestItem>
+  </Item>
+</Storage>

@@ -61,11 +61,11 @@
     <Compile Include="Messaging\ListenerCollection.cs" />
     <Compile Include="Messaging\MessageBase.cs" />
     <Compile Include="Messaging\Messenger.cs" />
-    <Compile Include="Settings\ISettingsContainer.cs" />
-    <Compile Include="Settings\ISettingsStorage.cs" />
-    <Compile Include="Settings\ObservableSettings.cs" />
-    <Compile Include="Settings\SettingsStorageBase.cs" />
-    <Compile Include="Settings\XmlSettingsStorage.cs" />
+    <Compile Include="Storage\IItemContainer.cs" />
+    <Compile Include="Storage\IDataStorage.cs" />
+    <Compile Include="Storage\ObservableItem.cs" />
+    <Compile Include="Storage\StorageBase.cs" />
+    <Compile Include="Storage\XmlStorage.cs" />
     <Compile Include="UI\Samples\EventLog.cs" />
     <Compile Include="UI\Samples\IEventLog.cs" />
     <Compile Include="UI\Samples\ISample.cs" />

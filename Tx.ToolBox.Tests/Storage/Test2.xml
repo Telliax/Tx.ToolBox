@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SettingsContainer>
+  <Settings SettingsId ="1" SettingsType="Tx.ToolBox.Tests.Storage.TestItem, Tx.ToolBox.Tests">
+    <TestItem>
+      <Name>Boris</Name>
+      <Age>11</Age>
+    </TestItem>
+  </Settings>
+</SettingsContainer>
