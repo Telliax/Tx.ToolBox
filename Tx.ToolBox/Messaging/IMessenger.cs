@@ -21,7 +21,7 @@ namespace Tx.ToolBox.Messaging
         /// <summary>
         /// Subscribes a delegate to TMessage event.
         /// </summary>
-        /// <param name="listener">Event handler.</param>
+        /// <param name="handler">Event handler.</param>
         /// <returns>Subscription handle. Dispose to unsubscribe.</returns>
         IDisposable Subscribe<TMessage>(Action<TMessage> handler)
             where TMessage : IMessage;

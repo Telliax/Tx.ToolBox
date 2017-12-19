@@ -76,7 +76,7 @@ namespace Tx.ToolBox.Tests.Storage
         [Test]
         public void Copy_OnCopy_ValueSetToOtherContainer()
         {
-            var storage = Mock.Of<IDataStorage>();
+            var storage = Mock.Of<IStorage>();
             string resultId = null;
             object resultSettings = null;
             Mock.Get(storage)

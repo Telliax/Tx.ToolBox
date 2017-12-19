@@ -20,10 +20,10 @@ namespace Tx.ToolBox.Storage
         {
             _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             _ownsStream = ownsStream;
-            Schema = new XmlSchema();
+            Schema = new XmlStorageSchema();
         }
 
-        public XmlSchema Schema { get; set; }
+        public XmlStorageSchema Schema { get; set; }
 
         public override void Load()
         {
@@ -106,7 +106,7 @@ namespace Tx.ToolBox.Storage
         private readonly bool _ownsStream;
     }
 
-    public class XmlSchema
+    public class XmlStorageSchema
     {
         public string RootTag { get; set; } = "Storage";
         public string ItemTag { get; set; } = "Item";

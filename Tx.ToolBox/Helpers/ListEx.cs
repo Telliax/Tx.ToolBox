@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tx.ToolBox.Helpers
 {
-    public static class ListEx
+    public static class LinqEx
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {

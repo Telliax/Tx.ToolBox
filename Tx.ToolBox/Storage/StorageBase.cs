@@ -4,7 +4,7 @@ using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Storage
 {
-    public abstract class StorageBase : IDataStorage
+    public abstract class StorageBase : IStorage
     {
         public IObservable<TItem> GetObservable<TItem>(string id = null)
             where TItem : class, new()
@@ -40,7 +40,7 @@ namespace Tx.ToolBox.Storage
             return Remove(id);
         }
 
-        public void CopyTo(IDataStorage otherStorage)
+        public void CopyTo(IStorage otherStorage)
         {
             lock (Items)
             {

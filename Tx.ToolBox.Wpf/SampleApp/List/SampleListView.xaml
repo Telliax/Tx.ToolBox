@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Tx.ToolBox.Wpf.SampleApp.List.SampleListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <GroupBox Header="Select sample:">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="200"/>
+                <RowDefinition Height="200" MinHeight="200"/>
+            </Grid.RowDefinitions>
+            <ListBox DisplayMemberPath="Name" ItemsSource="{Binding Samples}" SelectedItem="{Binding SelectedSample, Mode=OneWayToSource}" x:Name="List"/>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <TextBlock Text="{Binding SelectedItem.Desc, ElementName=List}" TextWrapping="Wrap"/>
+            </ScrollViewer>
+            <GridSplitter Grid.Row="1" ResizeDirection="Rows"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

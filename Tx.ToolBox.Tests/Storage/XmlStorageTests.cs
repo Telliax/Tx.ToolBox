@@ -39,7 +39,7 @@ namespace Tx.ToolBox.Tests.Storage
                 var item = new TestItem { Name = "Boris", Age = 11 };
                 using (var store = new XmlStorage(stream)
                 {
-                    Schema = new XmlSchema
+                    Schema = new XmlStorageSchema
                     {
                         IdAttribute = "SettingsId",
                         RootTag = "SettingsContainer",
@@ -118,8 +118,6 @@ namespace Tx.ToolBox.Tests.Storage
                     Assert.AreEqual(item2.Coordinate, item4.Coordinate);
                 }
             }
-
-            public void CopyTo
         }
     }
 

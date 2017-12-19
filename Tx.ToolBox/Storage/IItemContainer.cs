@@ -8,6 +8,6 @@ namespace Tx.ToolBox.Storage
         object Item { get; }
         Type ItemType { get; }
         void Set(object item);
-        void CopyTo(IDataStorage otherStorage);
+        void CopyTo(IStorage otherStorage);
     }
 }

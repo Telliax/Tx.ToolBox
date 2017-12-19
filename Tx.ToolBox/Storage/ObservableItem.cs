@@ -49,7 +49,7 @@ namespace Tx.ToolBox.Storage
             }
         }
 
-        public void CopyTo(IDataStorage otherStorage)
+        public void CopyTo(IStorage otherStorage)
         {
             otherStorage.Set(Item, Id);
         }

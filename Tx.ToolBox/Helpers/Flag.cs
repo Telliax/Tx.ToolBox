@@ -35,7 +35,7 @@ namespace Tx.ToolBox.Helpers
         /// <summary>
         /// Current state of the flag.
         /// </summary>
-        public bool IsSet { get { return _setCount > 0; } }
+        public bool IsSet => _setCount > 0;
 
         public static implicit operator bool(Flag flag)
         {

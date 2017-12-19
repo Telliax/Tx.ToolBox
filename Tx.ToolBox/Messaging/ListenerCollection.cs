@@ -10,8 +10,7 @@ namespace Tx.ToolBox.Messaging
     {
         public IDisposable Add(object listener)
         {
-            var typedListener = listener as IListener<TMessage>;
-            if (typedListener == null)
+            if (!(listener is IListener<TMessage> typedListener))
                 throw new InvalidOperationException(
                     $"Invalid listener type. Type {listener.GetType()} can not handle messages of type {typeof(TMessage)}.\n"
                     + "This is most likely a bug in IMessenger implementation.");
