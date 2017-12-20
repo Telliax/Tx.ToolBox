@@ -3,6 +3,7 @@ using Castle.Windsor;
 using Tx.ToolBox.Windsor;
 using Castle.MicroKernel.Registration;
 using System.Collections.Generic;
+using System.Linq;
 using Tx.ToolBox.Wpf.SampleApp.App;
 
 namespace Tx.ToolBox.Wpf.SampleApp

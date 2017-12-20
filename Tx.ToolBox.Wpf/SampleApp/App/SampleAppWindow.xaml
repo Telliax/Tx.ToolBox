@@ -27,6 +27,22 @@
             </Setter>
         </Style>
 
+        <Style TargetType="ListBox">
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="2"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="GridSplitter">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="ResizeBehavior" Value="PreviousAndCurrent"/>
@@ -45,48 +61,21 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        <Style TargetType="GridSplitter" x:Key="ColumnSplitter">
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="-5,0,0,0"/>
-            <Setter Property="Width" Value="10"/>
-            <Setter Property="ResizeBehavior" Value="PreviousAndCurrent"/>
-            <Setter Property="ResizeDirection" Value="Columns"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Padding" Value="2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        </Style>
-
-        <Style TargetType="ListBox">
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
-        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="100" MaxHeight="200" MinHeight="50"/>
         </Grid.RowDefinitions>
-        <DockPanel>
-            <ContentControl x:Name="ToolBarHost" DockPanel.Dock="Top"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="200"/>
-                    <ColumnDefinition Width="300" MinWidth="200"/>
-                </Grid.ColumnDefinitions>
-                <ContentControl x:Name="SampleHost"/>
-                <ContentControl x:Name="SampleListHost" Grid.Column="1"/>
-                <GridSplitter ResizeDirection="Columns" Grid.Column="1"/>
-            </Grid>
-        </DockPanel>
-
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="300" MinWidth="200"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl x:Name="SampleHost"/>
+            <ContentControl x:Name="SampleListHost" Grid.Column="1"/>
+            <GridSplitter ResizeDirection="Columns" Grid.Column="1"/>
+        </Grid>
         <ContentControl x:Name="LogHost" Grid.Row="1"/>
         <GridSplitter ResizeDirection="Rows" Grid.Row="1"/>
     </Grid>

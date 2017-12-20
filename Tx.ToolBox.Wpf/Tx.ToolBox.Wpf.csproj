@@ -63,22 +63,20 @@
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Converters\EnumConverterBase.cs" />
     <Compile Include="Converters\StringConverterBase.cs" />
-    <Compile Include="SampleApp\List\SampleListView.xaml.cs">
+    <Compile Include="SampleApp\Samples\SampleListView.xaml.cs">
       <DependentUpon>SampleListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleApp\List\SampleListViewModel.cs" />
     <Compile Include="SampleApp\Log\EventLogView.xaml.cs">
       <DependentUpon>EventLogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleApp\Log\EventLogViewModel.cs" />
-    <Compile Include="SampleApp\Manager\ISampleManager.cs" />
-    <Compile Include="SampleApp\Manager\SampleManager.cs" />
-    <Compile Include="SampleApp\Messages\LogMessage.cs" />
-    <Compile Include="SampleApp\Messages\SampleLoadedMessage.cs" />
-    <Compile Include="SampleApp\Sample\SelectedSampleView.xaml.cs">
+    <Compile Include="SampleApp\Samples\SampleManager.cs" />
+    <Compile Include="SampleApp\Log\LogMessage.cs" />
+    <Compile Include="SampleApp\Samples\SampleViewConverter.cs" />
+    <Compile Include="SampleApp\Samples\SampleViewModel.cs" />
+    <Compile Include="SampleApp\Samples\SelectedSampleView.xaml.cs">
       <DependentUpon>SelectedSampleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleApp\Sample\SelectedSampleViewModel.cs" />
     <Compile Include="ToolBar\IToolBarBuilder.cs" />
     <Compile Include="ToolBar\ToolBarView.cs" />
     <Compile Include="ToolBar\ToolBarViewModel.cs" />
@@ -109,7 +107,7 @@
     <Compile Include="ToolBar\Tools\ToolBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="SampleApp\List\SampleListView.xaml">
+    <Page Include="SampleApp\Samples\SampleListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,7 +119,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleApp\Sample\SelectedSampleView.xaml">
+    <Page Include="SampleApp\Samples\SelectedSampleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

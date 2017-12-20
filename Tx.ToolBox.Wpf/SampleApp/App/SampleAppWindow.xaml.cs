@@ -1,8 +1,7 @@
 ﻿using System.Windows;
-using Tx.ToolBox.Wpf.SampleApp.List;
 using Tx.ToolBox.Wpf.SampleApp.Log;
-using Tx.ToolBox.Wpf.SampleApp.Sample;
-using Tx.ToolBox.Wpf.ToolBar;
+using Tx.ToolBox.Wpf.SampleApp.Samples;
+using SampleListView = Tx.ToolBox.Wpf.SampleApp.Samples.SampleListView;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App
 {
@@ -14,11 +13,6 @@ namespace Tx.ToolBox.Wpf.SampleApp.App
         public SampleAppWindow()
         {
             InitializeComponent();
-        }
-
-        public ToolBarView ToolBar
-        {
-            set => ToolBarHost.Content = value;
         }
 
         public SelectedSampleView Sample

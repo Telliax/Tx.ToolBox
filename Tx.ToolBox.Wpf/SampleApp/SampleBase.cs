@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Tx.ToolBox.Wpf.SampleApp.App;
 
 namespace Tx.ToolBox.Wpf.SampleApp
 {

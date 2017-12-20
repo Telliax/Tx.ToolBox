@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Tx.ToolBox.Helpers;
 using Tx.ToolBox.Wpf.Templates;
 using Tx.ToolBox.Wpf.ToolBar.Tools.Button;
 

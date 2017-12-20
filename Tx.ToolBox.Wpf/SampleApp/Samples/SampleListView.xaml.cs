@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Tx.ToolBox.Wpf.SampleApp.List
+namespace Tx.ToolBox.Wpf.SampleApp.Samples
 {
     /// <summary>
     /// Interaction logic for SampleListView.xaml

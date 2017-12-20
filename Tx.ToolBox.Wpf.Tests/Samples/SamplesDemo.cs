@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using NUnit.Framework;
 using Tx.ToolBox.Wpf.SampleApp;
-using Tx.ToolBox.Wpf.SampleApp.App;
 
 namespace Tx.ToolBox.Wpf.Tests.Samples
 {
@@ -22,16 +19,16 @@ namespace Tx.ToolBox.Wpf.Tests.Samples
         {
             using (var boot = new SampleBootstrap("Test app"))
             {
-                boot.AddSamples(new Sample(), new Sample(), new Sample());
+                boot.AddSamples(new Sample(1), new Sample(2), new Sample(3));
                 boot.Run();
             }
         }
 
         private class Sample : SampleBase
         {
-            public Sample()
+            public Sample(int id)
             {
-                Name = "Sample #" + Guid.NewGuid();
+                Name = "Sample #" + id;
                 Description = "Desc: " + Name;
             }
 
@@ -47,7 +44,7 @@ namespace Tx.ToolBox.Wpf.Tests.Samples
 
             public void Install(IWindsorContainer container, IConfigurationStore store)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
                 container.Register(Component.For<FrameworkElement>().UsingFactoryMethod(() => new TextBlock { Text = Name }));
             }
         }

@@ -8,9 +8,8 @@ using Tx.ToolBox.Messaging;
 using Tx.ToolBox.Wpf.SampleApp.Log;
 using Tx.ToolBox.Wpf.ToolBar;
 using Tx.ToolBox.Wpf.Windsor;
-using Tx.ToolBox.Wpf.SampleApp.List;
-using Tx.ToolBox.Wpf.SampleApp.Sample;
-using Tx.ToolBox.Wpf.SampleApp.Manager;
+using Tx.ToolBox.Wpf.SampleApp.Samples;
+using SampleListView = Tx.ToolBox.Wpf.SampleApp.Samples.SampleListView;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App
 {
@@ -27,14 +26,13 @@ namespace Tx.ToolBox.Wpf.SampleApp.App
                                         .Instance(Dispatcher.CurrentDispatcher),
                                Component.For<IMessenger>()
                                         .ImplementedBy<Messenger>(),
-                               Component.For<ISampleManager>()
-                                        .ImplementedBy<SampleManager>()
+                               Component.For<SampleListViewModel>()
                                         .DependsOn(Dependency.OnValue<IWindsorContainer>(container)),
                                Component.For<IToolBar, ToolBarViewModel>());
             container.RegisterView<ToolBarView, ToolBarViewModel>();
             container.RegisterView<EventLogView, EventLogViewModel>();
             container.RegisterView<SampleListView, SampleListViewModel>();
-            container.RegisterView<SelectedSampleView, SelectedSampleViewModel>();
+            container.RegisterView<SelectedSampleView, SampleListViewModel>();
             container.Register(Component.For<SampleAppWindow>()
                                         .OnCreate(w => w.Title = AppTitle),
                                Component.For<SampleApplication>());

@@ -64,6 +64,8 @@
     <Compile Include="Storage\ObservableItem.cs" />
     <Compile Include="Storage\StorageBase.cs" />
     <Compile Include="Storage\XmlStorage.cs" />
+    <Compile Include="Threading\IActionQueue.cs" />
+    <Compile Include="Threading\ProcessLatestQueue.cs" />
     <Compile Include="Windsor\CollectionFacility.cs" />
     <Compile Include="Windsor\MessengerFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

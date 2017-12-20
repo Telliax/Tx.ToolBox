@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tx.ToolBox.Wpf.ToolBar;
 
-namespace Tx.ToolBox.Wpf.SampleApp.Sample
+namespace Tx.ToolBox.Wpf.SampleApp.Samples
 {
     /// <summary>
     /// Interaction logic for SelectedSampleView.xaml
@@ -23,6 +24,11 @@ namespace Tx.ToolBox.Wpf.SampleApp.Sample
         public SelectedSampleView()
         {
             InitializeComponent();
+        }
+
+        public ToolBarView ToolBar
+        {
+            set => ToolBarHost.Content = value;
         }
     }
 }
