@@ -2,14 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using FontAwesome.WPF;
 using NUnit.Framework;
-using Tx.ToolBox.Wpf.Templates;
-using Tx.ToolBox.Wpf.ToolBar;
-using Tx.ToolBox.Wpf.ToolBar.Tools.AsyncButton;
-using Tx.ToolBox.Wpf.ToolBar.Tools.Button;
+using Tx.ToolBox.Wpf.Tools;
+using Tx.ToolBox.Wpf.Tools.Buttons;
 
 namespace Tx.ToolBox.Wpf.Tests.ToolBar
 {

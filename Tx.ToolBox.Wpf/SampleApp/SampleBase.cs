@@ -29,14 +29,24 @@ namespace Tx.ToolBox.Wpf.SampleApp
             appContainer.AddChildContainer(_container);
             var installers = CreateInstallers().ToArray();
             _container.Install(installers);
+            OnLoad(_container);
         }
 
         public void Unload()
         {
+            OnUnload(_container);
             _container.Dispose();
         }
 
         protected abstract IEnumerable<IWindsorInstaller> CreateInstallers();
+
+        protected virtual void OnLoad(IWindsorContainer sampleContainer)
+        {
+        }
+
+        protected virtual void OnUnload(IWindsorContainer sampleContainer)
+        {
+        }
 
         private IWindsorContainer _container;
     }

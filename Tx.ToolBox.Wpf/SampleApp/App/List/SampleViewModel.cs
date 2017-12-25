@@ -1,6 +1,6 @@
 using Tx.ToolBox.Wpf.Mvvm;
 
-namespace Tx.ToolBox.Wpf.SampleApp.Samples
+namespace Tx.ToolBox.Wpf.SampleApp.App.List
 {
     public class SampleViewModel : ViewModelBase
     {

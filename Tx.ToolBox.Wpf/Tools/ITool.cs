@@ -1,6 +1,6 @@
 ﻿using Tx.ToolBox.Storage;
 
-namespace Tx.ToolBox.Wpf.ToolBar.Tools
+namespace Tx.ToolBox.Wpf.Tools
 {
     interface ITool
     {

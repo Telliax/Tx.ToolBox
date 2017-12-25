@@ -5,11 +5,11 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Tx.ToolBox.Messaging;
-using Tx.ToolBox.Wpf.SampleApp.Log;
-using Tx.ToolBox.Wpf.ToolBar;
+using Tx.ToolBox.Wpf.SampleApp.App.List;
+using Tx.ToolBox.Wpf.SampleApp.App.Log;
 using Tx.ToolBox.Wpf.Windsor;
-using Tx.ToolBox.Wpf.SampleApp.Samples;
-using SampleListView = Tx.ToolBox.Wpf.SampleApp.Samples.SampleListView;
+using Tx.ToolBox.Wpf.Tools;
+using Tx.ToolBox.Wpf.SampleApp.App.Sample;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App
 {
@@ -33,6 +33,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App
             container.RegisterView<EventLogView, EventLogViewModel>();
             container.RegisterView<SampleListView, SampleListViewModel>();
             container.RegisterView<SelectedSampleView, SampleListViewModel>();
+            container.RegisterView<LoadingScreenView, SampleListViewModel>();
             container.Register(Component.For<SampleAppWindow>()
                                         .OnCreate(w => w.Title = AppTitle),
                                Component.For<SampleApplication>());

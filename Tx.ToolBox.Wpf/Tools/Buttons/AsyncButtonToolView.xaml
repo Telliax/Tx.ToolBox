@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Tx.ToolBox.Wpf.ToolBar.Tools.AsyncButton.AsyncButtonToolView"
+﻿<UserControl x:Class="Tx.ToolBox.Wpf.Tools.Buttons.AsyncButtonToolView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:button="clr-namespace:Tx.ToolBox.Wpf.ToolBar.Tools.Button"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters">
+             xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters"
+             xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons">
     <Grid>
-       <button:ButtonToolView HideImage="{Binding IsExecuting}"/>
+       <buttons:ButtonToolView HideImage="{Binding IsExecuting}"/>
        <Border BorderThickness="0" Margin="2"
                Visibility="{Binding IsExecuting, Converter={converters:BoolToVisibilityConverter}}">
            <fa:ImageAwesome Icon="Spinner" Spin="{Binding IsExecuting}" SpinDuration="5" 

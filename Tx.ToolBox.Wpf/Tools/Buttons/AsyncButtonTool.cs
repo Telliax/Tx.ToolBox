@@ -2,9 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Tx.ToolBox.Wpf.Templates;
-using Tx.ToolBox.Wpf.ToolBar.Tools.Button;
 
-namespace Tx.ToolBox.Wpf.ToolBar.Tools.AsyncButton
+namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
     [Template(typeof(AsyncButtonToolView))]
     public abstract class AsyncButtonTool : ButtonTool, IDisposable

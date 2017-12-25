@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="Tx.ToolBox.Wpf.SampleApp.App.Sample.SelectedSampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sample1="clr-namespace:Tx.ToolBox.Wpf.SampleApp.App.Sample"
+             Content="{Binding SelectedSample, Converter={sample1:SampleViewConverter}, Mode=OneWay}"
+             Background="White"/>
+
+

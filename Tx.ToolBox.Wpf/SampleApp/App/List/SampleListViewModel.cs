@@ -9,9 +9,9 @@ using Tx.ToolBox.Helpers;
 using Tx.ToolBox.Messaging;
 using Tx.ToolBox.Threading;
 using Tx.ToolBox.Wpf.Mvvm;
-using Tx.ToolBox.Wpf.SampleApp.Log;
+using Tx.ToolBox.Wpf.SampleApp.App.Log;
 
-namespace Tx.ToolBox.Wpf.SampleApp.Samples
+namespace Tx.ToolBox.Wpf.SampleApp.App.List
 {
     class SampleListViewModel : ViewModelBase, IDisposable
     {

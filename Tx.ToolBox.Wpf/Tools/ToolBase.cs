@@ -2,7 +2,7 @@
 using Tx.ToolBox.Storage;
 using Tx.ToolBox.Wpf.Mvvm;
 
-namespace Tx.ToolBox.Wpf.ToolBar.Tools
+namespace Tx.ToolBox.Wpf.Tools
 {
     public abstract class ToolBase : ViewModelBase, ITool
     {

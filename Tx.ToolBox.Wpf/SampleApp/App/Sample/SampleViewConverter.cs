@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tx.ToolBox.Wpf.Converters;
+using Tx.ToolBox.Wpf.SampleApp.App.List;
 
-namespace Tx.ToolBox.Wpf.SampleApp.Samples
+namespace Tx.ToolBox.Wpf.SampleApp.App.Sample
 {
     class SampleViewConverter : ConverterBase
     {

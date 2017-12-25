@@ -1,6 +1,4 @@
-﻿using Tx.ToolBox.Wpf.ToolBar.Tools;
-
-namespace Tx.ToolBox.Wpf.ToolBar
+﻿namespace Tx.ToolBox.Wpf.Tools
 {
     internal interface IToolBarBuilder
     {

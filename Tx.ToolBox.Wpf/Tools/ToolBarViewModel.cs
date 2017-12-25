@@ -6,9 +6,8 @@ using Tx.ToolBox.Helpers;
 using Tx.ToolBox.Storage;
 using Tx.ToolBox.Wpf.Mvvm;
 using Tx.ToolBox.Wpf.Templates;
-using Tx.ToolBox.Wpf.ToolBar.Tools;
 
-namespace Tx.ToolBox.Wpf.ToolBar
+namespace Tx.ToolBox.Wpf.Tools
 {
     [Template(typeof(ToolBarView))]
     class ToolBarViewModel : ViewModelBase, IToolBar
@@ -34,11 +33,18 @@ namespace Tx.ToolBox.Wpf.ToolBar
 
         public IToolBarBuilder Setup()
         {
+            _tools.ForEach(t => t.SaveState(_storage));
             return new ToolBarBuilder(this);
         }
 
         private readonly IStorage _storage;
         private ObservableCollection<ITool> _tools = new ObservableCollection<ITool>();
+
+        private void UpdateTools(IList<ITool> newTools)
+        {
+            newTools.ForEach(t => t.LoadState(_storage));
+            Tools = new ObservableCollection<ITool>(newTools);
+        }
 
         private class ToolBarBuilder : IToolBarBuilder
         {
@@ -50,28 +56,25 @@ namespace Tx.ToolBox.Wpf.ToolBar
 
             public IToolBarBuilder Add(params ITool[] tools)
             {
-                tools.ForEach(t => t.LoadState(_toolBar._storage));
                 _tools.AddRange(tools);
                 return this;
             }
 
             public IToolBarBuilder Remove(params ITool[] tools)
             {
-                tools.ForEach(t => t.SaveState(_toolBar._storage));
                 _tools.RemoveAll(tools.Contains);
                 return this;
             }
 
             public IToolBarBuilder Clear()
             {
-                _tools.ForEach(t => t.SaveState(_toolBar._storage));
                 _tools.Clear();
                 return this;
             }
 
             public void Complete()
             {
-                _toolBar.Tools = new ObservableCollection<ITool>(_tools);
+                _toolBar.UpdateTools(_tools);
             }
 
             private readonly ToolBarViewModel _toolBar;

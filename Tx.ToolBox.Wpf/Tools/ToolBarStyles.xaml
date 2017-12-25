@@ -1,14 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Tx.ToolBox.Wpf.ToolBar"
                     xmlns:templates="clr-namespace:Tx.ToolBox.Wpf.Templates"
-                    xmlns:button="clr-namespace:Tx.ToolBox.Wpf.ToolBar.Tools.Button">
+                    xmlns:tools="clr-namespace:Tx.ToolBox.Wpf.Tools"
+                    xmlns:behaviors="clr-namespace:Tx.ToolBox.Wpf.Behaviors"
+                    xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons">
 
-    <Style TargetType="local:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
+    <Style TargetType="tools:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="ItemsSource" Value="{Binding Tools}"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="behaviors:ToolBarEx.AutoHideOverflow" Value="True"/>
         <Setter Property="ItemTemplateSelector">
             <Setter.Value>
                 <templates:AttributeTemplateSelector/>
@@ -16,9 +18,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="button:ButtonToolView" BasedOn="{StaticResource {x:Type Button}}">
+    <Style TargetType="buttons:ButtonToolView" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
         <Setter Property="Command" Value="{Binding Command}"/>
         <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="1"/>
         <Setter Property="Content" Value="{Binding}"/>
         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>

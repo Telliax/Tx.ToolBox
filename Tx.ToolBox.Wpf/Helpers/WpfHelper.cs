@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Security.Permissions;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace Tx.ToolBox.Wpf
@@ -9,6 +11,30 @@ namespace Tx.ToolBox.Wpf
     /// </summary>
     public static class WpfHelper
     {
+        public static TFreezable ToFrozen<TFreezable>(this TFreezable freezable)
+            where TFreezable : Freezable
+        {
+            freezable.Freeze();
+            return freezable;
+        }
+
+        public static TChild FindVisualChild<TChild>(this DependencyObject parent)
+            where TChild : DependencyObject
+        {
+            TChild result = null;
+            if (parent != null)
+            {
+                var count = VisualTreeHelper.GetChildrenCount(parent);
+                for (int i = 0; i < count; i++)
+                {
+                    var child = VisualTreeHelper.GetChild(parent, i);
+                    result = child as TChild ?? child.FindVisualChild<TChild>();
+                    if (result == null) break;
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Wrapper around regular BeginInvoke that takes Action instead of a Delegate.
         /// </summary>

@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace Tx.ToolBox.Wpf.ToolBar.Tools.Button
+namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
     public class ButtonToolView : System.Windows.Controls.Button
     {

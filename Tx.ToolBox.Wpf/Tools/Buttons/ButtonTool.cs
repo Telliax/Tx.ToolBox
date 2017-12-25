@@ -3,7 +3,7 @@ using System.Windows.Media;
 using Tx.ToolBox.Wpf.Mvvm;
 using Tx.ToolBox.Wpf.Templates;
 
-namespace Tx.ToolBox.Wpf.ToolBar.Tools.Button
+namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
     [Template(typeof(ButtonToolView))]
     public abstract class ButtonTool : ToolBase
@@ -30,7 +30,7 @@ namespace Tx.ToolBox.Wpf.ToolBar.Tools.Button
         public ImageSource Image
         {
             get => _image;
-            set => SetField(ref _image, value);
+            set => SetField(ref _image, value.ToFrozen());
         }
 
         protected abstract void Execute();
