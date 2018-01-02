@@ -5,12 +5,12 @@
              xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters"
              xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons">
     <Grid>
-       <buttons:ButtonToolView HideImage="{Binding IsExecuting}"/>
+       <buttons:ButtonToolView Visibility="{Binding IsExecuting, Converter={converters:BoolToVisibilityConverter True=Hidden, False=Visible}}"/>
        <Border BorderThickness="0" Margin="2"
                Visibility="{Binding IsExecuting, Converter={converters:BoolToVisibilityConverter}}">
            <fa:ImageAwesome Icon="Spinner" Spin="{Binding IsExecuting}" SpinDuration="5" 
-                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                            Margin="2" />
+                            HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                            Margin="2" Stretch="Uniform"/>
        </Border>
     </Grid>
 </UserControl>

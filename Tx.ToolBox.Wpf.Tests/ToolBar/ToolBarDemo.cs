@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Media;
 using FontAwesome.WPF;
 using NUnit.Framework;
+using Tx.ToolBox.Wpf.Helpers;
 using Tx.ToolBox.Wpf.Tools;
 using Tx.ToolBox.Wpf.Tools.Buttons;
 
@@ -26,19 +27,27 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
                 base.OnStartup(e);
                 var toolbar = new ToolBarViewModel();
                 toolbar.Setup()
-                       .Add(new Button(), new DisabledButton(), new AsyncButton())
+                       .Add(
+                            new ImageButton(), 
+                            new TextButton(),
+                            new Button(),
+                            new DisabledImageButton(),
+                            new DisabledButton(),
+                            new AsyncImageButton(),
+                            new AsyncButton()
+                            )
                        .Complete();
                 MainWindow = new Window {Content = new ToolBarView {DataContext = toolbar}};
                 MainWindow.ShowDialog();
             }
         }
 
-        private class Button : ButtonTool
+        private class ImageButton : ButtonTool
         {
-            public Button()
+            public ImageButton()
             {
                 Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.AngleLeft, Brushes.Black);
-                ToolTip = "Button";
+                ToolTip = "Image only button";
             }
 
             protected override void Execute()
@@ -47,12 +56,41 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
             }
         }
 
-        private class DisabledButton : ButtonTool
+        private class TextButton : ButtonTool
         {
-            public DisabledButton()
+            public TextButton()
+            {
+                Text = "Text";
+                ToolTip = "Text-only button";
+            }
+
+            protected override void Execute()
+            {
+                MessageBox.Show("Click!");
+            }
+        }
+
+        private class Button : ButtonTool
+        {
+            public Button()
+            {
+                Text = "Text";
+                Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Cab, Brushes.Black);
+                ToolTip = "Button with image and text";
+            }
+
+            protected override void Execute()
+            {
+                MessageBox.Show("Click!");
+            }
+        }
+
+        private class DisabledImageButton : ButtonTool
+        {
+            public DisabledImageButton()
             {
                 Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Flag, Brushes.Black);
-                ToolTip = "Disabled button";
+                ToolTip = "Disabled image button";
             }
 
             protected override void Execute()
@@ -66,9 +104,30 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
             }
         }
 
-        private class AsyncButton : AsyncButtonTool
+
+        private class DisabledButton : ButtonTool
         {
-            public AsyncButton()
+            public DisabledButton()
+            {
+                Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Gamepad, Brushes.Black);
+                ToolTip = "Disabled button with image and text";
+                Text = "Text";
+            }
+
+            protected override void Execute()
+            {
+                throw new NotImplementedException();
+            }
+
+            protected override bool CanExecute()
+            {
+                return false;
+            }
+        }
+
+        private class AsyncImageButton : AsyncButtonTool
+        {
+            public AsyncImageButton()
             {
                 Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Android, Brushes.Black);
                 ToolTip = "Async button";
@@ -77,7 +136,23 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
             protected override async Task ExecuteAsync(CancellationToken token)
             {
                 await Task.Delay(3000, token);
-                MessageBox.Show("Done!");
+                Application.Current.Dispatcher.BeginInvoke(() => MessageBox.Show("Done!"));
+            }
+        }
+
+        private class AsyncButton : AsyncButtonTool
+        {
+            public AsyncButton()
+            {
+                Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.HackerNews, Brushes.Black);
+                Text = "Text";
+                ToolTip = "Async button with text and image";
+            }
+
+            protected override async Task ExecuteAsync(CancellationToken token)
+            {
+                await Task.Delay(3000, token);
+                Application.Current.Dispatcher.BeginInvoke(() => MessageBox.Show("Done!"));
             }
         }
     }

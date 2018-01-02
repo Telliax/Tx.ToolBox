@@ -1,6 +1,6 @@
 ﻿namespace Tx.ToolBox.Wpf.Tools
 {
-    internal interface IToolBarBuilder
+    public interface IToolBarBuilder
     {
         IToolBarBuilder Add(params ITool[] tools);
         IToolBarBuilder Remove(params ITool[] tools);

@@ -1,26 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:tools="clr-namespace:Tx.ToolBox.Wpf.Tools">
+                    xmlns:tools="clr-namespace:Tx.ToolBox.Wpf.Tools"
+                    xmlns:behaviors="clr-namespace:Tx.ToolBox.Wpf.Behaviors"
+                    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib">
 
-    <Color x:Key="MainBackgroundColor">#FBFBFB</Color>
-    <Color x:Key="AdditionalBackgroundColor">#F3F3F3</Color>
+    <Color x:Key="MainBackgroundColor">White</Color>
+    <Color x:Key="AdditionalBackgroundColor">#FAFAFA</Color>
     <SolidColorBrush Color="{StaticResource MainBackgroundColor}" x:Key="MainBackgroundBrush"/>
     <SolidColorBrush Color="{StaticResource AdditionalBackgroundColor}" x:Key="AdditionalBackgroundBrush"/>
     <SolidColorBrush Color="Silver" x:Key="SeparatorBrush"/>
     
+    <collections:ArrayList x:Key="ToolbarBehaviors" x:Shared="False">
+        <behaviors:AutoHideOverflowButton/>
+    </collections:ArrayList>
+    
     <Style TargetType="tools:ToolBarView">
         <Setter Property="ToolBarTray.IsLocked" Value="True"/>
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="{StaticResource MainBackgroundColor}" Offset="0"/>
-                    <GradientStop Color="{StaticResource AdditionalBackgroundColor}" Offset="0.2"/>
-                    <GradientStop Color="{StaticResource AdditionalBackgroundColor}" Offset="0.8"/>
-                    <GradientStop Color="{StaticResource MainBackgroundColor}" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{StaticResource AdditionalBackgroundBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="behaviors:Behaviors.Source" Value="{StaticResource ToolbarBehaviors}"/>
     </Style>
     
     <Style TargetType="ListBox">

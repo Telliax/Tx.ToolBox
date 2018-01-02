@@ -2,7 +2,7 @@
 
 namespace Tx.ToolBox.Wpf.Tools
 {
-    interface ITool
+    public interface ITool
     {
         string Id { get; }
         

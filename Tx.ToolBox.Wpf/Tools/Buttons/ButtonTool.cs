@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using System.Windows.Media;
+using Tx.ToolBox.Wpf.Helpers;
 using Tx.ToolBox.Wpf.Mvvm;
 using Tx.ToolBox.Wpf.Templates;
 
@@ -13,7 +14,7 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
             Command = new Command(Execute, CanExecute);
         }
 
-        public ICommand Command { get; } 
+        public Command Command { get; } 
 
         public string ToolTip
         {

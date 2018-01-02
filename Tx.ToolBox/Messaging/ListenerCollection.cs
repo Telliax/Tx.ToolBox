@@ -48,13 +48,11 @@ namespace Tx.ToolBox.Messaging
 
                 using (_handleFlag.SetTemporary())
                 {
-                    Debug.WriteLine("handling");
                     foreach (var handler in _list)
                     {
                         if (typedMessage.Handled) return;
                         handler(typedMessage);
                     }
-                    Debug.WriteLine("handled");
                 }
 
                 if (_removedHandlers.Any())

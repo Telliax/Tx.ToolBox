@@ -42,7 +42,7 @@ namespace Tx.ToolBox.Wpf.Tests.Samples
 
             protected override void OnLoad(IWindsorContainer sampleContainer)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
                 sampleContainer.Resolve<IToolBar>().Setup().Add(new Button()).Complete();
             }
 

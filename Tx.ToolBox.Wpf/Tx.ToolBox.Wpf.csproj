@@ -40,6 +40,10 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blend.Interactivity.Wpf.1.0.1340.0\lib\net\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -47,6 +51,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blend.Interactivity.Wpf.1.0.1340.0\lib\net\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -58,13 +65,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\ListViewEx.cs" />
-    <Compile Include="Behaviors\ToolBarEx.cs" />
+    <Compile Include="Behaviors\AutoScrollOnItemAdded.cs" />
+    <Compile Include="Behaviors\BehaviorOnLoaded.cs" />
+    <Compile Include="Behaviors\CollapseOnEmptyImage.cs" />
+    <Compile Include="Behaviors\CollapseOnEmptyText.cs" />
+    <Compile Include="Behaviors\FadeOutOnDisabled.cs" />
+    <Compile Include="Behaviors\AutoHideOverflowButton.cs" />
+    <Compile Include="Behaviors\Behaviors.cs" />
     <Compile Include="Converters\BoolConverterBase.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Converters\EnumConverterBase.cs" />
     <Compile Include="Converters\StringConverterBase.cs" />
+    <Compile Include="Helpers\DispatcherEx.cs" />
     <Compile Include="SampleApp\App\List\SampleListView.xaml.cs">
       <DependentUpon>SampleListView.xaml</DependentUpon>
     </Compile>
@@ -82,6 +95,8 @@
     <Compile Include="SampleApp\App\Sample\SelectedSampleView.xaml.cs">
       <DependentUpon>SelectedSampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\AttributeTemplateSelectorEx.cs" />
+    <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
     <Compile Include="Tools\ToolBarView.cs" />
     <Compile Include="Tools\ToolBarViewModel.cs" />
@@ -91,7 +106,7 @@
     </Compile>
     <Compile Include="Tools\Buttons\ButtonToolView.cs" />
     <Compile Include="Windsor\WindsorEx.cs" />
-    <Compile Include="Helpers\WpfHelper.cs" />
+    <Compile Include="Helpers\DependencyObjectEx.cs" />
     <Compile Include="Mvvm\Command.cs" />
     <Compile Include="Mvvm\CommandT.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />

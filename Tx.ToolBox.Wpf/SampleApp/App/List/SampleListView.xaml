@@ -8,7 +8,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" MinHeight="200"/>
-                <RowDefinition Height="200" MinHeight="200"/>
+                <RowDefinition Height="*" MinHeight="200"/>
             </Grid.RowDefinitions>
 
             <ListBox DisplayMemberPath="Name" ItemsSource="{Binding Samples}" 

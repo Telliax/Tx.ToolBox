@@ -3,41 +3,47 @@
                     xmlns:templates="clr-namespace:Tx.ToolBox.Wpf.Templates"
                     xmlns:tools="clr-namespace:Tx.ToolBox.Wpf.Tools"
                     xmlns:behaviors="clr-namespace:Tx.ToolBox.Wpf.Behaviors"
-                    xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons">
+                    xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
 
     <Style TargetType="tools:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="ItemsSource" Value="{Binding Tools}"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="behaviors:ToolBarEx.AutoHideOverflow" Value="True"/>
-        <Setter Property="ItemTemplateSelector">
-            <Setter.Value>
-                <templates:AttributeTemplateSelector/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="ItemTemplateSelector" Value="{templates:AttributeTemplateSelectorEx}"/>
     </Style>
 
     <Style TargetType="buttons:ButtonToolView" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
         <Setter Property="Command" Value="{Binding Command}"/>
-        <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="1"/>
         <Setter Property="Content" Value="{Binding}"/>
         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Image Margin="2" Source="{Binding Image}"/>
-                    <DataTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.5"/>
-                        </Trigger>
-                        <DataTrigger Binding="{Binding HideImage, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
+                    <DockPanel MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Name="Panel" VerticalAlignment="Stretch">
+                        <i:Interaction.Behaviors>
+                            <behaviors:FadeOutOnDisabled/>
+                        </i:Interaction.Behaviors>
+
+                        <TextBlock Text="{Binding Text}" VerticalAlignment="Center" Margin="1" DockPanel.Dock="Right">
+                            <i:Interaction.Behaviors>
+                                <behaviors:CollapseOnEmptyText/>
+                            </i:Interaction.Behaviors>
+                        </TextBlock>
+
+                        <Border>
+                            <Image Source="{Binding Image}" Stretch="Uniform" Margin="1">
+                                <i:Interaction.Behaviors>
+                                    <behaviors:CollapseOnEmptyImage/>
+                                </i:Interaction.Behaviors>
+                            </Image>
+                        </Border>
+                    </DockPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>

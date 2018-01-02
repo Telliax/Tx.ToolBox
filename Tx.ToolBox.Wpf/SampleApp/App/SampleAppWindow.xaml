@@ -4,29 +4,32 @@
     <Window.Resources>
         <ResourceDictionary Source="Resources.xaml"/>
     </Window.Resources>
-    <Border Background="{StaticResource MainBackgroundBrush}">
+    <Border Background="{StaticResource MainBackgroundBrush}" BorderThickness="0,1,0,0" BorderBrush="{StaticResource SeparatorBrush}">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="100" MaxHeight="200" MinHeight="50"/>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="300" MinWidth="200"/>
+            </Grid.ColumnDefinitions>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="200"/>
-                    <ColumnDefinition Width="300" MinWidth="200"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="100" MaxHeight="200" MinHeight="50"/>
+                </Grid.RowDefinitions>
                 <Grid>
                     <DockPanel>
-                        <ContentControl x:Name="ToolBarHost" DockPanel.Dock="Top"/>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource SeparatorBrush}" Background="{StaticResource AdditionalBackgroundBrush}" DockPanel.Dock="Top">
+                            <ContentControl x:Name="ToolBarHost"/>
+                        </Border>
+
                         <ContentControl x:Name="SampleHost"/>
                     </DockPanel>
                     <ContentControl x:Name="LoadingScreenHost"/>
                 </Grid>
-                <ContentControl x:Name="SampleListHost" Grid.Column="1"/>
-                <GridSplitter ResizeDirection="Columns" Grid.Column="1"/>
+                <ContentControl x:Name="LogHost" Grid.Row="1"/>
+                <GridSplitter ResizeDirection="Rows" Grid.Row="1"/>
             </Grid>
-            <ContentControl x:Name="LogHost" Grid.Row="1"/>
-            <GridSplitter ResizeDirection="Rows" Grid.Row="1"/>
+            <ContentControl x:Name="SampleListHost" Grid.Column="1"/>
+            <GridSplitter ResizeDirection="Columns" Grid.Column="1"/>
         </Grid>
     </Border>
 </Window>
