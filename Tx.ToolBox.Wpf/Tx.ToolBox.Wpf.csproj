@@ -96,14 +96,13 @@
       <DependentUpon>SelectedSampleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Templates\AttributeTemplateSelectorEx.cs" />
+    <Compile Include="Tools\Buttons\AsyncButtonToolView.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
+    <Compile Include="Tools\Buttons\ToggleButtonToolView.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
     <Compile Include="Tools\ToolBarView.cs" />
     <Compile Include="Tools\ToolBarViewModel.cs" />
     <Compile Include="Tools\Buttons\AsyncButtonTool.cs" />
-    <Compile Include="Tools\Buttons\AsyncButtonToolView.xaml.cs">
-      <DependentUpon>AsyncButtonToolView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tools\Buttons\ButtonToolView.cs" />
     <Compile Include="Windsor\WindsorEx.cs" />
     <Compile Include="Helpers\DependencyObjectEx.cs" />
@@ -159,10 +158,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\Buttons\AsyncButtonToolView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -173,6 +168,8 @@
       <Name>Tx.ToolBox</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Bindings\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

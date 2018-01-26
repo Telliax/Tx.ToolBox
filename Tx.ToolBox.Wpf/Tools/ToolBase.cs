@@ -26,7 +26,14 @@ namespace Tx.ToolBox.Wpf.Tools
             if (settingsStorage.Contains<ToolState>(Id))
             {
                 var state = settingsStorage.Get<ToolState>(Id);
-                SetState(state.Value);
+                if (state.Value != null)
+                {
+                    SetState(state.Value);
+                }
+                else
+                {
+                    SetDefaultState();
+                }
             }
             else
             {

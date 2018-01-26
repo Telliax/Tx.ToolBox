@@ -34,6 +34,12 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
             set => SetField(ref _image, value.ToFrozen());
         }
 
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => SetField(ref _isVisible, value);
+        }
+
         protected abstract void Execute();
 
         protected virtual bool CanExecute()
@@ -44,5 +50,6 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
         private ImageSource _image;
         private string _text;
         private string _toolTip;
+        private bool _isVisible;
     }
 }
