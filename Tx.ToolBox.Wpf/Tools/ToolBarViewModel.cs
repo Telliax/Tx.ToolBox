@@ -10,7 +10,7 @@ using Tx.ToolBox.Wpf.Templates;
 namespace Tx.ToolBox.Wpf.Tools
 {
     [Template(typeof(ToolBarView))]
-    public class ToolBarViewModel : ViewModelBase, IToolBar
+    public class ToolBarViewModel : ViewModel, IToolBar
     {
         public ToolBarViewModel() : this(new EmptyStorage())
         {

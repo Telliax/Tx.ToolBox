@@ -1,62 +1,32 @@
 ﻿using System;
-using System.Windows.Input;
 
 namespace Tx.ToolBox.Wpf.Mvvm
 {
-    public class Command : ICommand
+    public class Command : CommandBase
     {
         public Command(Action action, Func<bool> canExecute = null)
-            : this(action == null ? (Action<object>)null : _ => action(),
-                   canExecute == null ? (Func<object, bool>)null : _ => canExecute())
-        {
-        }
-
-        public Command(Action<object> action, Func<object, bool> canExecute = null)
         {
             _action = action ?? throw new ArgumentNullException(nameof(action));
-            _canExecute = canExecute;
-
-            if (_canExecute != null) return;
-            _canExecute = _ => true;
-            UseCommandManager = false;
+            _canExecute = canExecute ?? (() => true);
+            UseCommandManager = canExecute != null;
         }
 
-        public bool UseCommandManager { get; set; } = true;
-
-        public void RefreshCanExecute()
+        public static implicit operator Command(Action action)
         {
-            UserCanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            return new Command(action);
         }
 
-        public event EventHandler CanExecuteChanged
+        public override bool CanExecute(object parameter)
         {
-            add
-            {
-                if (UseCommandManager)
-                {
-                    CommandManager.RequerySuggested += value;
-                }
-                UserCanExecuteChanged += value;
-            }
-            remove
-            {
-                CommandManager.RequerySuggested -= value;
-                UserCanExecuteChanged -= value;
-            }
+            return _canExecute();
         }
 
-        public bool CanExecute(object parameter)
+        public override void Execute(object parameter)
         {
-            return _canExecute(parameter);
+            _action();
         }
 
-        public void Execute(object parameter)
-        {
-            _action(parameter);
-        }
-
-        private readonly Action<object> _action;
-        private readonly Func<object, bool> _canExecute;
-        private event EventHandler UserCanExecuteChanged;
+        private readonly Action _action;
+        private readonly Func<bool> _canExecute;
     }
 }

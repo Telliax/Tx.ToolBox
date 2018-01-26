@@ -13,7 +13,7 @@ using Tx.ToolBox.Wpf.SampleApp.App.Log;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App.List
 {
-    class SampleListViewModel : ViewModelBase, IDisposable
+    class SampleListViewModel : ViewModel, IDisposable
     {
         public SampleListViewModel(IWindsorContainer container, ISample[] samples, IMessenger messenger)
         {

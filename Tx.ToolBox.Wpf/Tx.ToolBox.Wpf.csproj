@@ -50,6 +50,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.5.24.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Tpl.Dataflow.4.5.24\lib\portable-net45+win8+wpa81\System.Threading.Tasks.Dataflow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Blend.Interactivity.Wpf.1.0.1340.0\lib\net\System.Windows.Interactivity.dll</HintPath>
@@ -78,6 +82,21 @@
     <Compile Include="Converters\EnumConverterBase.cs" />
     <Compile Include="Converters\StringConverterBase.cs" />
     <Compile Include="Helpers\DispatcherEx.cs" />
+    <Compile Include="Mvvm\AsyncCommand.cs" />
+    <Compile Include="Mvvm\AsyncCommandBase.cs" />
+    <Compile Include="Mvvm\AsyncCommandT.cs" />
+    <Compile Include="Mvvm\Command.cs" />
+    <Compile Include="Mvvm\CommandBase.cs" />
+    <Compile Include="Mvvm\CommandT.cs" />
+    <Compile Include="Mvvm\SettingsViewModel.cs" />
+    <Compile Include="Mvvm\ValidationViewModel.cs" />
+    <Compile Include="Mvvm\Validation\PropertyValidator.cs" />
+    <Compile Include="Mvvm\Validation\RevalidationReason.cs" />
+    <Compile Include="Mvvm\Validation\Rule.cs" />
+    <Compile Include="Mvvm\Validation\ValidationResult.cs" />
+    <Compile Include="Mvvm\Validation\ValidationRule.cs" />
+    <Compile Include="Mvvm\Validation\Validator.cs" />
+    <Compile Include="Mvvm\ViewModel.cs" />
     <Compile Include="SampleApp\App\List\SampleListView.xaml.cs">
       <DependentUpon>SampleListView.xaml</DependentUpon>
     </Compile>
@@ -106,9 +125,6 @@
     <Compile Include="Tools\Buttons\ButtonToolView.cs" />
     <Compile Include="Windsor\WindsorEx.cs" />
     <Compile Include="Helpers\DependencyObjectEx.cs" />
-    <Compile Include="Mvvm\Command.cs" />
-    <Compile Include="Mvvm\CommandT.cs" />
-    <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleApp\ISample.cs" />
     <Compile Include="SampleApp\App\SampleApplication.cs" />

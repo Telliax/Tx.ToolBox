@@ -4,7 +4,7 @@ using Tx.ToolBox.Wpf.Mvvm;
 
 namespace Tx.ToolBox.Wpf.Tools
 {
-    public abstract class ToolBase : ViewModelBase, ITool
+    public abstract class ToolBase : ViewModel, ITool
     {
         protected ToolBase()
         {
