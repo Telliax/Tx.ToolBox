@@ -13,6 +13,18 @@ namespace Tx.ToolBox.Wpf.Tools
 
         public string Id { get; protected set; }
 
+        public string ToolTip
+        {
+            get => _toolTip;
+            set => SetField(ref _toolTip, value);
+        }
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => SetField(ref _isVisible, value);
+        }
+
         public void SaveState(IStorage settingsStorage)
         {
             if (!UseSerialization) return;
@@ -55,6 +67,9 @@ namespace Tx.ToolBox.Wpf.Tools
         protected virtual void SetDefaultState()
         {
         }
+
+        private string _toolTip;
+        private bool _isVisible = true;
     }
 
     public class ToolState

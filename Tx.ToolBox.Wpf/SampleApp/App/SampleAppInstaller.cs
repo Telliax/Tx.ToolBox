@@ -5,11 +5,12 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Tx.ToolBox.Messaging;
+using Tx.ToolBox.Wpf.SampleApp.App.Events;
 using Tx.ToolBox.Wpf.SampleApp.App.List;
-using Tx.ToolBox.Wpf.SampleApp.App.Log;
 using Tx.ToolBox.Wpf.Windsor;
 using Tx.ToolBox.Wpf.Tools;
 using Tx.ToolBox.Wpf.SampleApp.App.Sample;
+using EventLogView = Tx.ToolBox.Wpf.SampleApp.App.Events.EventLogView;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App
 {

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tx.ToolBox.Wpf.Templates;
 
 namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
+    [Template(typeof(ToggleButtonToolView))]
     abstract class ToggleButtonTool : ButtonTool
     {
         public bool IsChecked
@@ -14,8 +16,9 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
             get => _isChecked;
             set
             {
-                if (IsChecked == value) return;
-                SetIsChecked(value);
+                _isChecked = value;
+                OnPropertyChanged();
+                OnIsChekedChanged();
             } 
         }
 
@@ -27,7 +30,7 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
 
         protected override void SetState(object state)
         {
-            SetIsChecked((bool)state);
+            IsChecked = (bool)state;
         }
 
         protected override object GetState()
@@ -37,14 +40,7 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
 
         protected override void SetDefaultState()
         {
-            SetIsChecked(false);
-        }
-
-        protected void SetIsChecked(bool value)
-        {
-            _isChecked = value;
-            OnPropertyChanged(nameof(IsChecked));
-            OnIsChekedChanged();
+            IsChecked = false;
         }
 
         private bool _isChecked;

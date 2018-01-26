@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using Tx.ToolBox.Wpf.Tools;
-using Tx.ToolBox.Wpf.SampleApp.App.Log;
 using Tx.ToolBox.Wpf.SampleApp.App.Sample;
 using Tx.ToolBox.Wpf.SampleApp.App.List;
+using EventLogView = Tx.ToolBox.Wpf.SampleApp.App.Events.EventLogView;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App
 {

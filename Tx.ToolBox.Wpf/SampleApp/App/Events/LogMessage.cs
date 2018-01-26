@@ -1,7 +1,7 @@
 ﻿using System;
 using Tx.ToolBox.Messaging;
 
-namespace Tx.ToolBox.Wpf.SampleApp.App.Log
+namespace Tx.ToolBox.Wpf.SampleApp.App.Events
 {
     class LogMessage : MessageBase
     {

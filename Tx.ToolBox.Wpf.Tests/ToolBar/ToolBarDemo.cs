@@ -34,7 +34,8 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
                             new DisabledImageButton(),
                             new DisabledButton(),
                             new AsyncImageButton(),
-                            new AsyncButton()
+                            new AsyncButton(),
+                            new ToggleButton()
                             )
                        .Complete();
                 MainWindow = new Window {Content = new ToolBarView {DataContext = toolbar}};
@@ -153,6 +154,20 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
             {
                 await Task.Delay(3000, token);
                 Application.Current.Dispatcher.BeginInvoke(() => MessageBox.Show("Done!"));
+            }
+        }
+
+        private class ToggleButton : ToggleButtonTool 
+        {
+            public ToggleButton()
+            {
+                Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Bomb, Brushes.Black);
+                ToolTip = "Image only togglebutton";
+            }
+
+            protected override void OnIsChekedChanged()
+            {
+                MessageBox.Show(IsChecked ? "Enabled!" : "Disabled!");
             }
         }
     }

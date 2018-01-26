@@ -3,9 +3,9 @@ using System.Windows.Threading;
 using Tx.ToolBox.Messaging;
 using Tx.ToolBox.Wpf.Mvvm;
 
-namespace Tx.ToolBox.Wpf.SampleApp.App.Log
+namespace Tx.ToolBox.Wpf.SampleApp.App.Events
 {
-    class EventLogViewModel : ViewModelBase, IListener<LogMessage>
+    class EventLogViewModel : ViewModel, IListener<LogMessage>
     {
         public EventLogViewModel(Dispatcher dispatcher)
         {
@@ -30,7 +30,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.Log
         private const int MaxSize = 30;
         private readonly Dispatcher _dispatcher;
 
-        public class MessageViewModel : ViewModelBase
+        public class MessageViewModel : ViewModel
         {
             public MessageViewModel(LogMessage message)
             {

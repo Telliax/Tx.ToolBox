@@ -100,12 +100,12 @@
     <Compile Include="SampleApp\App\List\SampleListView.xaml.cs">
       <DependentUpon>SampleListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleApp\App\Log\EventLogView.xaml.cs">
+    <Compile Include="SampleApp\App\Events\EventLogView.xaml.cs">
       <DependentUpon>EventLogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleApp\App\Log\EventLogViewModel.cs" />
+    <Compile Include="SampleApp\App\Events\EventLogViewModel.cs" />
     <Compile Include="SampleApp\App\List\SampleListViewModel.cs" />
-    <Compile Include="SampleApp\App\Log\LogMessage.cs" />
+    <Compile Include="SampleApp\App\Events\LogMessage.cs" />
     <Compile Include="SampleApp\App\Sample\LoadingScreenView.xaml.cs">
       <DependentUpon>LoadingScreenView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Templates\AttributeTemplateSelectorEx.cs" />
     <Compile Include="Tools\Buttons\AsyncButtonToolView.cs" />
+    <Compile Include="Tools\Buttons\ButtonToolBase.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonToolView.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
@@ -154,7 +155,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SampleApp\App\Log\EventLogView.xaml">
+    <Page Include="SampleApp\App\Events\EventLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
