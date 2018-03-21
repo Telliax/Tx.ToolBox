@@ -35,6 +35,8 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
                             new DisabledButton(),
                             new AsyncImageButton(),
                             new AsyncButton(),
+                            new ToggleImageButton(),
+                            new ToggleTextButton(),
                             new ToggleButton()
                             )
                        .Complete();
@@ -157,12 +159,41 @@ namespace Tx.ToolBox.Wpf.Tests.ToolBar
             }
         }
 
-        private class ToggleButton : ToggleButtonTool 
+        private class ToggleImageButton : ToggleButtonTool 
         {
-            public ToggleButton()
+            public ToggleImageButton()
             {
                 Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Bomb, Brushes.Black);
                 ToolTip = "Image only togglebutton";
+            }
+
+            protected override void OnIsChekedChanged()
+            {
+                MessageBox.Show(IsChecked ? "Enabled!" : "Disabled!");
+            }
+        }
+
+        private class ToggleTextButton : ToggleButtonTool
+        {
+            public ToggleTextButton()
+            {
+                Text = "Text";
+                ToolTip = "Text only togglebutton";
+            }
+
+            protected override void OnIsChekedChanged()
+            {
+                MessageBox.Show(IsChecked ? "Enabled!" : "Disabled!");
+            }
+        }
+
+        private class ToggleButton : ToggleButtonTool
+        {
+            public ToggleButton()
+            {
+                Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.Gear, Brushes.Black);
+                Text = "Text";
+                ToolTip = "Text only togglebutton";
             }
 
             protected override void OnIsChekedChanged()
