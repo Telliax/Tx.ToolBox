@@ -90,11 +90,12 @@
     <Compile Include="Mvvm\CommandT.cs" />
     <Compile Include="Mvvm\SettingsViewModel.cs" />
     <Compile Include="Mvvm\ValidationViewModel.cs" />
-    <Compile Include="Mvvm\Validation\PropertyValidator.cs" />
+    <Compile Include="Mvvm\Validation\AsyncValidationRule.cs" />
     <Compile Include="Mvvm\Validation\RevalidationReason.cs" />
     <Compile Include="Mvvm\Validation\Rule.cs" />
     <Compile Include="Mvvm\Validation\ValidationResult.cs" />
     <Compile Include="Mvvm\Validation\ValidationRule.cs" />
+    <Compile Include="Mvvm\Validation\ValidationRuleBase.cs" />
     <Compile Include="Mvvm\Validation\Validator.cs" />
     <Compile Include="Mvvm\ViewModel.cs" />
     <Compile Include="SampleApp\App\List\SampleListView.xaml.cs">

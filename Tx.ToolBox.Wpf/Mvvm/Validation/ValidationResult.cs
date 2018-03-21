@@ -1,18 +1,17 @@
+using System;
+using System.Linq;
+
 namespace Tx.ToolBox.Wpf.Mvvm.Validation
 {
     public class ValidationResult
     {
-        public ValidationResult()
+        public ValidationResult(params string[] errors)
         {
+            Errors = errors;
         }
 
-        public ValidationResult(string error)
-        {
-            Error = error;
-        }
-
-        public bool HasError => Error != null;
-        public string Error { get; }
+        public bool HasErrors => Errors.Length > 0;
+        public string[] Errors { get; }
 
         public static implicit operator ValidationResult(string errorMessage)
         {
@@ -22,7 +21,22 @@ namespace Tx.ToolBox.Wpf.Mvvm.Validation
 
         public override string ToString()
         {
-            return HasError ? Error : "No errors";
+            return HasErrors ? String.Join("\n", Errors) : "No errors";
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other is ValidationResult result)
+            {
+                if (Errors.Length != result.Errors.Length) return false;
+                return Errors.SequenceEqual(result.Errors);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return String.Join("", Errors).GetHashCode();
         }
 
         public static readonly ValidationResult ValidResult = new ValidationResult();
