@@ -67,8 +67,7 @@ namespace Tx.ToolBox.Windsor
 
             void IDecommissionConcern.Apply(ComponentModel model, object component)
             {
-                if (_subscription == null) return;
-                _subscription.Dispose();
+                _subscription?.Dispose();
             }
 
             private readonly IKernel _kernel;

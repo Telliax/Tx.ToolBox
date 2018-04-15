@@ -38,7 +38,7 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
             return _isChecked;
         }
 
-        protected override void SetDefaultState()
+        protected override void LoadDefaultState()
         {
             IsChecked = false;
         }

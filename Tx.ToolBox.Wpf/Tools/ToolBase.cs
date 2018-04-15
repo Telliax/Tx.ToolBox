@@ -25,6 +25,12 @@ namespace Tx.ToolBox.Wpf.Tools
             set => SetField(ref _isVisible, value);
         }
 
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetField(ref _isEnabled, value);
+        }
+
         public void SaveState(IStorage settingsStorage)
         {
             if (!UseSerialization) return;
@@ -44,12 +50,12 @@ namespace Tx.ToolBox.Wpf.Tools
                 }
                 else
                 {
-                    SetDefaultState();
+                    LoadDefaultState();
                 }
             }
             else
             {
-                SetDefaultState();
+                LoadDefaultState();
             }
         }
 
@@ -64,12 +70,13 @@ namespace Tx.ToolBox.Wpf.Tools
             return -1;
         }
 
-        protected virtual void SetDefaultState()
+        protected virtual void LoadDefaultState()
         {
         }
 
         private string _toolTip;
         private bool _isVisible = true;
+        private bool _isEnabled = true;
     }
 
     public class ToolState

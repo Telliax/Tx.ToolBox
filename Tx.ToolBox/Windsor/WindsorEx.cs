@@ -15,5 +15,12 @@ namespace Tx.ToolBox.Windsor
         {
             return container.Register(Component.For<T>());
         }
+
+        public static IWindsorContainer RegisterService<TService, TImpl>(this IWindsorContainer container)
+            where TService : class
+            where TImpl : class, TService
+        {
+            return container.Register(Component.For<TService>().ImplementedBy<TImpl>());
+        }
     }
 }

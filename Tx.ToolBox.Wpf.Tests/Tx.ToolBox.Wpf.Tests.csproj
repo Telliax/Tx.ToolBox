@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Tx.ToolBox.Wpf.Tests.Demo</StartupObject>
+    <StartupObject>Tx.ToolBox.Wpf.Tests.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -74,11 +74,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Demo.cs" />
+    <Compile Include="Demo\Tools\Buttons.cs" />
+    <Compile Include="Demo\Tools\ToolBarInstaller.cs" />
+    <Compile Include="Demo\Tools\ToolBarSample.cs" />
+    <Compile Include="Demo\Tools\ToolBarSampleView.xaml.cs">
+      <DependentUpon>ToolBarSampleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Samples\SamplesDemo.cs" />
     <Compile Include="Templates\AttributeTamplateSelectorTests.cs" />
-    <Compile Include="ToolBar\ToolBarDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,9 +92,19 @@
       <Project>{F622AC03-8BB9-4A5C-85FD-5ED486872A4D}</Project>
       <Name>Tx.ToolBox.Wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tx.ToolBox\Tx.ToolBox.csproj">
+      <Project>{D262529B-34DF-4158-99A2-DD7E5F82ED01}</Project>
+      <Name>Tx.ToolBox</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Demo\Tools\ToolBarSampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

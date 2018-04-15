@@ -15,6 +15,11 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.Events
         public string Message { get; }
         public DateTime TimeStamp { get; }
         public LogMessageType Type { get; }
+
+        public static implicit operator LogMessage(string message)
+        {
+            return new LogMessage(message);
+        }
     }
 
     enum LogMessageType
