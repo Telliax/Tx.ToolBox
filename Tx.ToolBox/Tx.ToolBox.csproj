@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\AsyncEx.cs" />
     <Compile Include="Helpers\DisposableEx.cs" />
     <Compile Include="Helpers\EnumEx.cs" />
     <Compile Include="Helpers\Flag.cs" />

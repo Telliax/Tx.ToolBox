@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Tx.ToolBox.Helpers;
 using Tx.ToolBox.Wpf.Mvvm.Validation;
 
 namespace Tx.ToolBox.Wpf.Mvvm
@@ -11,43 +12,28 @@ namespace Tx.ToolBox.Wpf.Mvvm
     {
         protected ValidationViewModel()
         {
-            Validator = new Validator();
-            Validator.ErrorsChanged += OnErrorsChanged;
+            Validator = new Validator(this);
         }
 
-        public virtual IEnumerable GetErrors(string propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
         {
             return Validator.GetErrors(propertyName);
         }
 
-        public virtual bool HasErrors => Validator.HasErrors;
+        bool INotifyDataErrorInfo.HasErrors => Validator.HasErrors;
 
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        public virtual async Task ValidateAsync()
+        event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
         {
-            Validator.ValidateAll();
-            await Validator.AsyncValidation;
+            add => Validator.ErrorsChanged += value;
+            remove => Validator.ErrorsChanged -= value;
         }
 
-        protected Validator Validator { get; }
+        public Validator Validator { get; }
 
         protected override void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
-            if (String.IsNullOrEmpty(propertyName))
-            {
-                Validator.ValidateAll(RevalidationReason.PropertyChanged);
-            }
-            else
-            {
-                Validator.Validate(propertyName, RevalidationReason.PropertyChanged);
-            }
-        }
-
-        protected void OnErrorsChanged([CallerMemberName]string propertyName = null)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            Validator.ValidateAsync(propertyName, RevalidationReason.PropertyChanged).Forget();
         }
     }
 }

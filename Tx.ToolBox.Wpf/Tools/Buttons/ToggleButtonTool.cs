@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Tx.ToolBox.Wpf.Templates;
+﻿using Tx.ToolBox.Wpf.Templates;
 
 namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
@@ -44,7 +38,5 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
         }
 
         private bool _isChecked;
-
-
     }
 }
