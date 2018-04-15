@@ -10,12 +10,14 @@ namespace Tx.ToolBox.Wpf.Templates
     {
         public TemplateAttribute(Type viewType)
         {
-            ViewType = viewType;
+            ViewType = viewType ?? throw new ArgumentNullException(nameof(viewType));
         }
 
         /// <summary>
         /// Type of DataTemplate's underlying view.
         /// </summary>
-        public Type ViewType { get; private set; }
+        public Type ViewType { get; }
+
+        public string DataContextPath { get; set; }
     }
 }

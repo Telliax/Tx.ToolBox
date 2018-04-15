@@ -31,14 +31,14 @@ namespace Tx.ToolBox.Wpf.Tools
             set => SetField(ref _isEnabled, value);
         }
 
-        public void SaveState(IStorage settingsStorage)
+        public virtual void SaveState(IStorage settingsStorage)
         {
             if (!UseSerialization) return;
             var state = new ToolState {Value = GetState()};
             settingsStorage.Set(state, Id);
         }
 
-        public void LoadState(IStorage settingsStorage)
+        public virtual void LoadState(IStorage settingsStorage)
         {
             if (!UseSerialization) return;
             if (settingsStorage.Contains<ToolState>(Id))

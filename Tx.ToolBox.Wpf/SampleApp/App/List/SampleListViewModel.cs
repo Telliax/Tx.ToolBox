@@ -32,7 +32,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
             get { return _selectedSample; }
             set
             {
-                var handle = _loadingFlag.SetTemporary();
+                var handle = _loadingFlag.Set();
                 OnPropertyChanged(nameof(IsLoading));       
                 _queue.Post(t => ChangeSample(value, t))
                       .ContinueWith(t =>

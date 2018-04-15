@@ -1,4 +1,6 @@
-﻿using Tx.ToolBox.Wpf.Templates;
+﻿using System;
+using Tx.ToolBox.Helpers;
+using Tx.ToolBox.Wpf.Templates;
 
 namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
@@ -12,7 +14,16 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
             {
                 _isChecked = value;
                 OnPropertyChanged();
-                OnIsChekedChanged();
+                try
+                {
+                    OnIsChekedChanged();
+                }
+                catch (Exception e)
+                {
+                    //Wpf tends to swallow exceptions thrown during databinding update
+                    //this makes sure that exception does not go unnoticed
+                    e.RethrowOnThreadPool();
+                }
             } 
         }
 

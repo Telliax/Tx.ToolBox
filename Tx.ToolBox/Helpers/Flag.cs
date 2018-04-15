@@ -13,7 +13,7 @@ namespace Tx.ToolBox.Helpers
         /// Temporary sets the flag value to true.
         /// </summary>
         /// <returns>Sets flag value back to false when disposed (unless it was set more than once).</returns>
-        public IDisposable SetTemporary()
+        public IDisposable Set()
         {
             Interlocked.Increment(ref _setCount);
             int unset = 0;

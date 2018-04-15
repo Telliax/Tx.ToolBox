@@ -46,7 +46,7 @@ namespace Tx.ToolBox.Messaging
             {
                 var typedMessage = (TMessage)message;
 
-                using (_handleFlag.SetTemporary())
+                using (_handleFlag.Set())
                 {
                     foreach (var handler in _list)
                     {

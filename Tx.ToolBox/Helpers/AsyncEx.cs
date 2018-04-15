@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Tx.ToolBox.Helpers
 {
@@ -6,6 +7,11 @@ namespace Tx.ToolBox.Helpers
     {
         public static void Forget(this Task task)
         {
+        }
+
+        public static void RethrowOnThreadPool(this Exception ex)
+        {
+            Task.Run(() => throw new AggregateException(ex));
         }
     }
 }

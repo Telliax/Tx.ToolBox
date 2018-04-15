@@ -13,25 +13,17 @@ namespace Tx.ToolBox.Wpf.Templates
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item == null) return null;
-            var view = GetViewType(item, container);
-            if (view == null) return null;
-            if (!view.IsPublic) throw new NotSupportedException(view.FullName + " has to be public in order to be used as DataTemplate!");
-            var template = CreateTemplate(view);
-            return template;
-        }
+            var attribute = GetAttribute(item, container);
+            if (attribute == null) return null;
 
-        protected virtual Type GetViewType(object item, DependencyObject container)
-        {
-            var type = item.GetType();
-            var attr = type.GetCustomAttributes(typeof(TemplateAttribute), true).FirstOrDefault() as TemplateAttribute;
-            if (attr == null) return null;
-            return attr.ViewType;
-        }
+            var view = attribute.ViewType;
+            var dataContext = attribute.DataContextPath ?? ".";
 
-        protected virtual DataTemplate CreateTemplate(Type view)
-        {
-            var xaml = String.Format(Template, view.Name);
+            if (!view.IsPublic) throw new NotSupportedException(view.FullName + " has to be public in order to be used as DataTemplate! That's a WPF limitation.");
+
+            var xaml = "<DataTemplate>" +
+                           $"<v:{view.Name} DataContext=\"{{Binding {dataContext}}}\"/>" +
+                       "</DataTemplate>";
             var context = new ParserContext
             {
                 XamlTypeMapper = new XamlTypeMapper(new string[0])
@@ -41,12 +33,14 @@ namespace Tx.ToolBox.Wpf.Templates
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
             context.XmlnsDictionary.Add("v", "v");
+
             var template = (DataTemplate)XamlReader.Parse(xaml, context);
             return template;
         }
 
-        protected string Template = "<DataTemplate>" +
-                                          "<v:{0} />" +
-                                    "</DataTemplate>";
+        protected virtual TemplateAttribute GetAttribute(object item, DependencyObject container)
+        {
+            return (TemplateAttribute)item?.GetType().GetCustomAttributes(typeof(TemplateAttribute), true).FirstOrDefault();
+        }
     }
 }

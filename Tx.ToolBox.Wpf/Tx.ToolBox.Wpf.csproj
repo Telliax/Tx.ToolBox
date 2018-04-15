@@ -76,6 +76,7 @@
     <Compile Include="Behaviors\FadeOutOnDisabled.cs" />
     <Compile Include="Behaviors\AutoHideOverflowButton.cs" />
     <Compile Include="Behaviors\Behaviors.cs" />
+    <Compile Include="Behaviors\UpdateSourceOnEnter.cs" />
     <Compile Include="Converters\BoolConverterBase.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
@@ -121,6 +122,10 @@
     <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonToolView.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
+    <Compile Include="Tools\Text\LabelTool.cs" />
+    <Compile Include="Tools\Text\LabelToolView.cs" />
+    <Compile Include="Tools\Text\TextTool.cs" />
+    <Compile Include="Tools\Text\TextToolView.cs" />
     <Compile Include="Tools\ToolBarView.cs" />
     <Compile Include="Tools\ToolBarViewModel.cs" />
     <Compile Include="Tools\Buttons\AsyncButtonTool.cs" />
@@ -188,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bindings\" />
+    <Folder Include="Tools\Drop\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

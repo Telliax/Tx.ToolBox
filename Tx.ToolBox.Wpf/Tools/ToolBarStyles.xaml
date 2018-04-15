@@ -6,7 +6,9 @@
                     xmlns:buttons="clr-namespace:Tx.ToolBox.Wpf.Tools.Buttons"
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
-                    xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters">
+                    xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters"
+                    xmlns:text="clr-namespace:Tx.ToolBox.Wpf.Tools.Text"
+                    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib">
 
     <Style TargetType="tools:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="ItemsSource" Value="{Binding Tools}"/>
@@ -87,4 +89,44 @@
     </Style>
 
     <Style TargetType="buttons:ToggleButtonToolView" BasedOn="{StaticResource ToggleButtonStyle}"/>
+
+    <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        <Setter Property="Text" Value="{Binding Text}"/>
+        <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="{Binding Width}"/>
+        <Setter Property="behaviors:Behaviors.Source">
+            <Setter.Value>
+                <collections:ArrayList>
+                    <behaviors:FadeOutOnDisabled/>
+                </collections:ArrayList>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="text:LabelToolView" BasedOn="{StaticResource TextBlockStyle}"/>
+    
+    <Style TargetType="TextBox" x:Key="TextBoxStyle" BasedOn="{StaticResource {x:Static ToolBar.TextBoxStyleKey}}">
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        <Setter Property="Text" Value="{Binding Text}"/>
+        <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="{Binding Width}"/>
+        <Setter Property="behaviors:Behaviors.Source">
+            <Setter.Value>
+                <collections:ArrayList>
+                    <behaviors:UpdateTextSourceOnEnter/>
+                </collections:ArrayList>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="text:TextToolView" BasedOn="{StaticResource TextBoxStyle}"/>
 </ResourceDictionary>

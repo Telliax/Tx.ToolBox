@@ -15,6 +15,11 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
             container.RegisterService<ITool, ImageButton>();
             container.RegisterService<ITool, TextButton>();
             container.RegisterService<ITool, ImageAndTextButton>();
+            container.RegisterService<ITool, DisabledButton>();
+            container.RegisterService<ITool, ToggleButton>();
+            container.RegisterService<ITool, AsyncButton>();
+            container.RegisterService<ITool, Label>();
+            container.RegisterService<ITool, TextInput>();
 
             container.RegisterService<FrameworkElement, ToolBarSampleView>();
         }
