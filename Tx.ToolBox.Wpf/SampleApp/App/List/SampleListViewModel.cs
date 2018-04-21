@@ -20,7 +20,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
             _container = container;
             _messenger = messenger;
             Samples = new ObservableCollection<SampleViewModel>(samples.Select(s => new SampleViewModel(s)));
-            _queue = new ProcessLatestQueue();
+            _scheduler = new RunLatestScheduler();
         }
 
         public bool IsLoading => _loadingFlag.IsSet; 
@@ -29,42 +29,40 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
 
         public SampleViewModel SelectedSample
         {
-            get { return _selectedSample; }
-            set
-            {
-                var handle = _loadingFlag.Set();
-                OnPropertyChanged(nameof(IsLoading));       
-                _queue.Post(t => ChangeSample(value, t))
-                      .ContinueWith(t =>
-                                    {
-                                        handle.Dispose();
-                                        OnPropertyChanged(nameof(IsLoading));
-                                    }, 
-                                    TaskScheduler.FromCurrentSynchronizationContext());
-            }
+            get => _selectedSample;
+            set => ChangeSampleAsync(value);
         }
 
         public void Dispose()
         {
-            _queue.Dispose();
+            _scheduler.Dispose();
             SelectedSample?.Sample.Unload();
         }
 
         private readonly IWindsorContainer _container;
         private readonly IMessenger _messenger;
         private readonly Flag _loadingFlag = new Flag();
-        private readonly ProcessLatestQueue _queue;
+        private readonly RunLatestScheduler _scheduler;
         private SampleViewModel _selectedSample;
 
-        private void ChangeSample(SampleViewModel sample, CancellationToken cancellationToken)
+        private async void ChangeSampleAsync(SampleViewModel sample)
         {
-            Unload(cancellationToken);
-            Load(sample, cancellationToken);
+            using (_loadingFlag.Set())
+            {
+                OnPropertyChanged(nameof(IsLoading));
+                await Task.Factory.StartNew(ChangeSample, CancellationToken.None, TaskCreationOptions.None, _scheduler);
+            }
+            OnPropertyChanged(nameof(IsLoading));
+
+            void ChangeSample()
+            {
+                Unload();
+                Load(sample);
+            }
         }
 
-        private void Unload(CancellationToken cancellationToken)
+        private void Unload()
         {
-            if (cancellationToken.IsCancellationRequested) return;
             var oldSample = _selectedSample?.Sample;
             if (oldSample == null) return;
             _selectedSample = null;
@@ -78,9 +76,9 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
             }
         }
 
-        private void Load(SampleViewModel sample, CancellationToken cancellationToken)
+        private void Load(SampleViewModel sample)
         {
-            if (sample != null && !cancellationToken.IsCancellationRequested)
+            if (sample != null)
             {
                 try
                 {

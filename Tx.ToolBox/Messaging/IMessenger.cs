@@ -30,7 +30,7 @@ namespace Tx.ToolBox.Messaging
         /// Sends message to event pipeline.
         /// </summary>
         /// <param name="message">Message to send.</param>
-        /// <returns>Awaitable task, that returns true if message was processed successfully. Otherwise - false.</returns>
-        Task<bool> PublishAsync(IMessage message);
+        /// <returns>Awaitable task, that returns when message was processed.</returns>
+        Task PublishAsync(IMessage message);
     }
 }

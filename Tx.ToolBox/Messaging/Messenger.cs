@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using Tx.ToolBox.Helpers;
+using Tx.ToolBox.Threading;
 
 namespace Tx.ToolBox.Messaging
 {
     /// <summary>
-    /// TPL.Dataflow-based implementation of IMessenger.
     /// Guarantees that messages are processed with a degree of parallelism of 1 in FIFO order.
     /// </summary>
     public class Messenger : IMessenger, IDisposable
@@ -16,18 +16,13 @@ namespace Tx.ToolBox.Messaging
         public Messenger(int bufferSize = 1000)
         {
             if (bufferSize < 1) throw new ArgumentException("Buffer size can not be less than 1.", nameof(bufferSize));
-
-            _pipeLine = new ActionBlock<Job>((Action<Job>)Handle, new ExecutionDataflowBlockOptions
-            {
-                MaxDegreeOfParallelism = 1, 
-                BoundedCapacity = bufferSize,
-            });
+            _scheduler = new FifoScheduler(bufferSize);
         }
 
         public void Dispose()
         {
             if (_disposed) return;
-            _pipeLine.Complete();
+            _scheduler.Dispose();
             _disposed = true;
         }
 
@@ -55,21 +50,25 @@ namespace Tx.ToolBox.Messaging
             return Subscribe(typeof(TMessage), new DelegateListener<TMessage>(handler));
         }
 
-        public async Task<bool> PublishAsync(IMessage message)
+        public async Task PublishAsync(IMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
-            var job = new Job(message);
-            var enqueued = await _pipeLine.SendAsync(job);
-            if (!enqueued)
+            await Task.Factory.StartNew(Publish, CancellationToken.None, TaskCreationOptions.None, _scheduler);
+
+            void Publish()
             {
-                job.Result.SetResult(false);
+                IListenerCollection listeners;
+                lock (_subscribers)
+                {
+                    _subscribers.TryGetValue(message.GetType(), out listeners);
+                }
+                listeners?.Handle(message);
             }
-            return await job.Result.Task;
         }
 
         private readonly Dictionary<Type, IListenerCollection> _subscribers = new Dictionary<Type, IListenerCollection>();
-        private readonly ActionBlock<Job> _pipeLine;
         private bool _disposed;
+        private readonly FifoScheduler _scheduler;
 
         private IDisposable Subscribe(Type messageType, object listener)
         {
@@ -86,34 +85,6 @@ namespace Tx.ToolBox.Messaging
             }
 
             return list.Add(listener);
-        }
-
-        private void Handle(Job job)
-        {
-            IListenerCollection listeners;
-            lock (_subscribers)
-            {
-                _subscribers.TryGetValue(job.Message.GetType(), out listeners);
-            }
-            try
-            {
-                listeners?.Handle(job.Message);
-                job.Result.SetResult(true);
-            }
-            catch (Exception ex)
-            {
-                job.Result.SetException(ex);
-            }
-        }
-
-        private class Job
-        {
-            public Job(IMessage message)
-            {
-                Message = message;
-            }
-            public IMessage Message { get; }
-            public TaskCompletionSource<bool> Result { get; } = new TaskCompletionSource<bool>();
         }
     }
 }
