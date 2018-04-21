@@ -7,6 +7,7 @@ using FontAwesome.WPF;
 using Tx.ToolBox.Messaging;
 using Tx.ToolBox.Wpf.SampleApp.App.Events;
 using Tx.ToolBox.Wpf.Tools.Buttons;
+using Tx.ToolBox.Wpf.Tools.Drop;
 using Tx.ToolBox.Wpf.Tools.Text;
 using Timer = System.Timers.Timer;
 
@@ -137,6 +138,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
             _messenger = messenger;
             ToolTip = "Enter integer value and press 'Enter'.";
             Value = 100;
+            Width = 50;
         }
 
         protected override (bool CanParse, int Value) ConvertBack(string text)
@@ -148,9 +150,28 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
         protected override void OnValueChanged()
         {
             base.OnValueChanged();
-            _messenger.PublishAsync(new LogMessage($"Value changed to {Value}!"));
+            _messenger.PublishAsync(new LogMessage($"TextBox value has changed to {Value}!"));
         }
 
         private readonly IMessenger _messenger;
     }
+
+    class IntComboBox : ComboBoxTool<int>
+    {
+        public IntComboBox(IMessenger messenger)
+        {
+            _messenger = messenger;
+            ToolTip = "Enter integer value and press 'Enter'.";
+            SetOptions(1,10,100);
+            Width = 50;
+        }
+
+        protected override void OnSelectedItemChanged()
+        {
+            _messenger.PublishAsync(new LogMessage($"ComboBox value has changed to {SelectedItem}!"));
+        }
+
+        private readonly IMessenger _messenger;
+    }
+
 }

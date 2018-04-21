@@ -121,6 +121,8 @@
     <Compile Include="Tools\Buttons\ButtonToolBase.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonToolView.cs" />
+    <Compile Include="Tools\Drop\ComboBoxTool.cs" />
+    <Compile Include="Tools\Drop\ComboBoxToolView.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
     <Compile Include="Tools\Text\LabelTool.cs" />
     <Compile Include="Tools\Text\LabelToolView.cs" />
@@ -193,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bindings\" />
-    <Folder Include="Tools\Drop\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

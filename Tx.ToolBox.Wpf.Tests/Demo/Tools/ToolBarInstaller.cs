@@ -20,6 +20,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
             container.RegisterService<ITool, AsyncButton>();
             container.RegisterService<ITool, Label>();
             container.RegisterService<ITool, TextInput>();
+            container.RegisterService<ITool, IntComboBox>();
 
             container.RegisterService<FrameworkElement, ToolBarSampleView>();
         }

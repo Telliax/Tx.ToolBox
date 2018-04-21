@@ -22,7 +22,7 @@ namespace Tx.ToolBox.Wpf.Tools.Buttons
                 {
                     //Wpf tends to swallow exceptions thrown during databinding update
                     //this makes sure that exception does not go unnoticed
-                    e.RethrowOnThreadPool();
+                    new AggregateException(e).RethrowOnThreadPool();
                 }
             } 
         }

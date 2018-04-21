@@ -20,7 +20,7 @@ namespace Tx.ToolBox.Wpf.Tools.Text
                 }
                 catch (Exception e)
                 {
-                    e.RethrowOnThreadPool();
+                    new AggregateException(e).RethrowOnThreadPool();
                 }
             }
         }

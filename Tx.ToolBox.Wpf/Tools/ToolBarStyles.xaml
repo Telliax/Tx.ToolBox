@@ -8,7 +8,8 @@
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
                     xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters"
                     xmlns:text="clr-namespace:Tx.ToolBox.Wpf.Tools.Text"
-                    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib">
+                    xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+                    xmlns:drop="clr-namespace:Tx.ToolBox.Wpf.Tools.Drop">
 
     <Style TargetType="tools:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="ItemsSource" Value="{Binding Tools}"/>
@@ -129,4 +130,18 @@
     </Style>
     
     <Style TargetType="text:TextToolView" BasedOn="{StaticResource TextBoxStyle}"/>
+
+    <Style TargetType="ComboBox" x:Key="ComboBoxStyle" BasedOn="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}">
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
+        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+        <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="{Binding Width}"/>
+        <Setter Property="ItemsSource" Value="{Binding Items}"/>
+        <Setter Property="SelectedItem" Value="{Binding SelectedItem}"/>
+    </Style>
+
+    <Style TargetType="drop:ComboBoxToolView" BasedOn="{StaticResource ComboBoxStyle}"/>
 </ResourceDictionary>

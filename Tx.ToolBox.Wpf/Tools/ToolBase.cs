@@ -40,8 +40,7 @@ namespace Tx.ToolBox.Wpf.Tools
 
         public virtual void LoadState(IStorage settingsStorage)
         {
-            if (!UseSerialization) return;
-            if (settingsStorage.Contains<ToolState>(Id))
+            if (UseSerialization && settingsStorage.Contains<ToolState>(Id))
             {
                 var state = settingsStorage.Get<ToolState>(Id);
                 if (state.Value != null)
