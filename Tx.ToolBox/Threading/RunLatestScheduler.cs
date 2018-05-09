@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Threading
 {
     public class RunLatestScheduler : TaskScheduler,  IDisposable
     {
-        public RunLatestScheduler()
+        public RunLatestScheduler(bool waitOnDispose = true)
         {
+            _waitOnDispose = waitOnDispose;
             _thread = new Thread(ExecutionLoop);
             _thread.Start();
         }
@@ -27,8 +29,12 @@ namespace Tx.ToolBox.Threading
                 _isDisposed = true;
                 _taskReceived.Set();
             }
-            _thread.Join();
-            _taskReceived.Dispose();
+
+            AsyncEx.Run(() =>
+            {
+                _thread.Join();
+                _taskReceived.Dispose();
+            }, async: !_waitOnDispose);
         }
 
         protected override void QueueTask(Task task)
@@ -59,7 +65,8 @@ namespace Tx.ToolBox.Threading
         private Task _nextTask;
         private readonly object _lock = new object();
         private readonly ManualResetEvent _taskReceived = new ManualResetEvent(false);
-        private volatile bool _isDisposed = false;
+        private volatile bool _isDisposed;
+        private readonly bool _waitOnDispose;
 
         private void ExecutionLoop()
         {

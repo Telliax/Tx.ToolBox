@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Tx.ToolBox.Wpf.Tools.Drop
+namespace Tx.ToolBox.Wpf.Tools.Popup
 {
     public class ComboBoxToolView : ComboBox
     {

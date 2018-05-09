@@ -9,7 +9,12 @@
                     xmlns:converters="clr-namespace:Tx.ToolBox.Wpf.Converters"
                     xmlns:text="clr-namespace:Tx.ToolBox.Wpf.Tools.Text"
                     xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
-                    xmlns:drop="clr-namespace:Tx.ToolBox.Wpf.Tools.Drop">
+                    xmlns:popup="clr-namespace:Tx.ToolBox.Wpf.Tools.Popup"
+                    xmlns:misc="clr-namespace:Tx.ToolBox.Wpf.Tools.Misc">
+
+    <collections:ArrayList x:Key="ToolbarBehaviors" x:Shared="False">
+        <behaviors:OverflowButtonManager Mode="Auto"/>
+    </collections:ArrayList>
 
     <Style TargetType="tools:ToolBarView" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="ItemsSource" Value="{Binding Tools}"/>
@@ -17,6 +22,16 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="ItemTemplateSelector" Value="{templates:AttributeTemplateSelectorEx}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="behaviors:Behaviors.Source" Value="{StaticResource ToolbarBehaviors}"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ToolBarPanel}}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
     </Style>
     
     <DataTemplate x:Key="ButtonTemplate">
@@ -25,7 +40,7 @@
                 <behaviors:FadeOutOnDisabled/>
             </i:Interaction.Behaviors>
 
-            <TextBlock Text="{Binding Text}" VerticalAlignment="Center" Margin="1" DockPanel.Dock="Right">
+            <TextBlock Text="{Binding Text}" Margin="1" DockPanel.Dock="Right">
                 <i:Interaction.Behaviors>
                     <behaviors:CollapseOnEmptyText/>
                 </i:Interaction.Behaviors>
@@ -62,12 +77,13 @@
         <Setter Property="Command" Value="{Binding Command}"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="1"/>
+        <Setter Property="Padding" Value="2"/>
         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
         <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
         <Setter Property="Content" Value="{Binding}"/>
         <Setter Property="ContentTemplate" Value="{StaticResource ButtonTemplate}"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="{x:Type buttons:ButtonToolView}" BasedOn="{StaticResource ButtonStyle}"/>
@@ -80,6 +96,7 @@
         <Setter Property="Command" Value="{Binding Command}"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="1"/>
+        <Setter Property="Padding" Value="2"/>
         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
         <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
@@ -92,7 +109,7 @@
     <Style TargetType="buttons:ToggleButtonToolView" BasedOn="{StaticResource ToggleButtonStyle}"/>
 
     <Style TargetType="TextBlock" x:Key="TextBlockStyle">
-        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Margin" Value="2,1"/>
         <Setter Property="ToolTip" Value="{Binding ToolTip}"/>
         <Setter Property="Visibility" Value="{Binding IsVisible, Converter={converters:BoolToVisibilityConverter}}"/>
         <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
@@ -120,6 +137,7 @@
         <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="{Binding Width}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="behaviors:Behaviors.Source">
             <Setter.Value>
                 <collections:ArrayList>
@@ -141,7 +159,16 @@
         <Setter Property="Width" Value="{Binding Width}"/>
         <Setter Property="ItemsSource" Value="{Binding Items}"/>
         <Setter Property="SelectedItem" Value="{Binding SelectedItem}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <Style TargetType="drop:ComboBoxToolView" BasedOn="{StaticResource ComboBoxStyle}"/>
+    <Style TargetType="popup:ComboBoxToolView" BasedOn="{StaticResource ComboBoxStyle}"/>
+
+    <Style TargetType="Separator" x:Key="SeparatorStyle" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}">
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Margin" Value="4,2"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style TargetType="misc:SeparatorToolView" BasedOn="{StaticResource SeparatorStyle}"/>
 </ResourceDictionary>

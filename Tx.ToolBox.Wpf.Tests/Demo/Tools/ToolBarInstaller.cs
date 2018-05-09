@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Tx.ToolBox.Windsor;
 using Tx.ToolBox.Wpf.Tools;
+using Tx.ToolBox.Wpf.Tools.Misc;
 
 namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
 {
@@ -18,7 +18,9 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
             container.RegisterService<ITool, DisabledButton>();
             container.RegisterService<ITool, ToggleButton>();
             container.RegisterService<ITool, AsyncButton>();
+            container.RegisterService<ITool, SeparatorTool>("separator1");
             container.RegisterService<ITool, Label>();
+            container.RegisterService<ITool, SeparatorTool>("separator2");
             container.RegisterService<ITool, TextInput>();
             container.RegisterService<ITool, IntComboBox>();
 

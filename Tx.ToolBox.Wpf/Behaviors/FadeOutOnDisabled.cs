@@ -6,7 +6,7 @@ using System.Windows.Interactivity;
 
 namespace Tx.ToolBox.Wpf.Behaviors
 {
-    class FadeOutOnDisabled : Behavior<UIElement>
+    public class FadeOutOnDisabled : Behavior<UIElement>
     {
         public static readonly DependencyProperty DisabledOpacityProperty = DependencyProperty.Register(
             "DisabledOpacity", typeof(double), typeof(FadeOutOnDisabled), new PropertyMetadata(0.5));

@@ -6,7 +6,7 @@ using System.Windows.Interactivity;
 
 namespace Tx.ToolBox.Wpf.Behaviors
 {
-    class CollapseOnEmptyText : Behavior<TextBlock>
+    public class CollapseOnEmptyText : Behavior<TextBlock>
     {
         protected override void OnAttached()
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using Tx.ToolBox.Helpers;
 using Tx.ToolBox.Wpf.Templates;
 
-namespace Tx.ToolBox.Wpf.Tools.Drop
+namespace Tx.ToolBox.Wpf.Tools.Popup
 {
     [Template(typeof(ComboBoxToolView))]
     public abstract class ComboBoxTool<T> : ToolBase

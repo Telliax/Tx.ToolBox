@@ -3,15 +3,19 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Threading
 {
     class FifoScheduler : TaskScheduler, IDisposable
     {
-        public FifoScheduler(int maxQueueCapacity) 
+        public FifoScheduler(int maxQueueCapacity, bool waitOnDispose = true) 
         {
+            _waitOnDispose = waitOnDispose;
             _tasks = new BlockingCollection<Task>(maxQueueCapacity);
             _thread = new Thread(ExecutionLoop);
+            _cts = new CancellationTokenSource();
+            _token = _cts.Token;
             _thread.Start();
         }
 
@@ -19,11 +23,16 @@ namespace Tx.ToolBox.Threading
 
         public void Dispose()
         {
-            if (!_thread.IsAlive) return;
+            if (_token.IsCancellationRequested) return;
 
             _cts.Cancel();
-            _thread.Join();
-            _tasks.Dispose();
+
+            AsyncEx.Run(() =>
+            {
+                _thread.Join();
+                _tasks.Dispose();
+                _cts.Dispose();
+            }, async: !_waitOnDispose);
         }
 
         protected override void QueueTask(Task task)
@@ -43,15 +52,23 @@ namespace Tx.ToolBox.Threading
 
         private readonly BlockingCollection<Task> _tasks;
         private readonly Thread _thread;
-        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cts;
+        private CancellationToken _token;
+        private readonly bool _waitOnDispose;
 
         private void ExecutionLoop()
         {
             while (true)
             {
-                var task = _tasks.Take(_cts.Token);
-                if (_cts.IsCancellationRequested) return;
-                TryExecuteTask(task);
+                try
+                {
+                    if (_token.IsCancellationRequested) return;
+                    var task = _tasks.Take(_token);
+                    TryExecuteTask(task);
+                }
+                catch (OperationCanceledException)
+                {
+                }
             }
         }
     }

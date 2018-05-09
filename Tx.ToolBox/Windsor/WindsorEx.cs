@@ -10,17 +10,27 @@ namespace Tx.ToolBox.Windsor
 {
     public static class WindsorEx
     {
-        public static IWindsorContainer Register<T>(this IWindsorContainer container) 
-            where T : class
+        public static IWindsorContainer Register<TComponent>(this IWindsorContainer container, string id = null) 
+            where TComponent : class
         {
-            return container.Register(Component.For<T>());
+            return container.Register(Component.For<TComponent>().MaybeNamed(id));
         }
 
-        public static IWindsorContainer RegisterService<TService, TImpl>(this IWindsorContainer container)
+        public static IWindsorContainer RegisterService<TService, TImpl>(this IWindsorContainer container, string id = null)
             where TService : class
             where TImpl : class, TService
         {
-            return container.Register(Component.For<TService>().ImplementedBy<TImpl>());
+            return container.Register(Component.For<TService>().ImplementedBy<TImpl>().MaybeNamed(id));
+        }
+
+        private static ComponentRegistration<T> MaybeNamed<T>(this ComponentRegistration<T> component, string id) 
+            where T : class
+        {
+            if (id != null)
+            {
+                component = component.Named(id);
+            }
+            return component;
         }
     }
 }

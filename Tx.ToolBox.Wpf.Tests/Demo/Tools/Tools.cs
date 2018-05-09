@@ -7,7 +7,7 @@ using FontAwesome.WPF;
 using Tx.ToolBox.Messaging;
 using Tx.ToolBox.Wpf.SampleApp.App.Events;
 using Tx.ToolBox.Wpf.Tools.Buttons;
-using Tx.ToolBox.Wpf.Tools.Drop;
+using Tx.ToolBox.Wpf.Tools.Popup;
 using Tx.ToolBox.Wpf.Tools.Text;
 using Timer = System.Timers.Timer;
 
@@ -37,7 +37,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
         public TextButton()
         {
             ToolTip = "Text Button";
-            Text = "Text";
+            Text = "Button";
         }
     }
 
@@ -47,7 +47,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
         {
             Image = ImageAwesome.CreateImageSource(FontAwesomeIcon.FacebookSquare, Brushes.Black);
             ToolTip = "Image+Text Button";
-            Text = "Image+Text";
+            Text = "Button";
         }
     }
 
@@ -161,7 +161,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
         public IntComboBox(IMessenger messenger)
         {
             _messenger = messenger;
-            ToolTip = "Enter integer value and press 'Enter'.";
+            ToolTip = "Select one of the predefined integer values.";
             SetOptions(1,10,100);
             Width = 50;
         }

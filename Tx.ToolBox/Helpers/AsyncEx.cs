@@ -13,5 +13,16 @@ namespace Tx.ToolBox.Helpers
         {
             Task.Run(() => throw new AggregateException(ex));
         }
+
+        public static Task Run(this Action action, bool async)
+        {
+            if (!async)
+            {
+                action();
+                return Task.CompletedTask;
+            }
+
+            return Task.Run(action);
+        }
     }
 }

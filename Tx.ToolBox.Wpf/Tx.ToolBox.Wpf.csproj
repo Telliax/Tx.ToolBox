@@ -74,7 +74,7 @@
     <Compile Include="Behaviors\CollapseOnEmptyImage.cs" />
     <Compile Include="Behaviors\CollapseOnEmptyText.cs" />
     <Compile Include="Behaviors\FadeOutOnDisabled.cs" />
-    <Compile Include="Behaviors\AutoHideOverflowButton.cs" />
+    <Compile Include="Behaviors\OverflowButtonManager.cs" />
     <Compile Include="Behaviors\Behaviors.cs" />
     <Compile Include="Behaviors\UpdateSourceOnEnter.cs" />
     <Compile Include="Converters\BoolConverterBase.cs" />
@@ -121,8 +121,10 @@
     <Compile Include="Tools\Buttons\ButtonToolBase.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonTool.cs" />
     <Compile Include="Tools\Buttons\ToggleButtonToolView.cs" />
-    <Compile Include="Tools\Drop\ComboBoxTool.cs" />
-    <Compile Include="Tools\Drop\ComboBoxToolView.cs" />
+    <Compile Include="Tools\Misc\SeparatorTool.cs" />
+    <Compile Include="Tools\Misc\SeparatorToolView.cs" />
+    <Compile Include="Tools\Popup\ComboBoxTool.cs" />
+    <Compile Include="Tools\Popup\ComboBoxToolView.cs" />
     <Compile Include="Tools\IToolBarBuilder.cs" />
     <Compile Include="Tools\Text\LabelTool.cs" />
     <Compile Include="Tools\Text\LabelToolView.cs" />

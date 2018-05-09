@@ -5,7 +5,7 @@ using System.Windows.Interactivity;
 
 namespace Tx.ToolBox.Wpf.Behaviors
 {
-    class CollapseOnEmptyImage : Behavior<Image>
+    public class CollapseOnEmptyImage : Behavior<Image>
     {
         protected override void OnAttached()
         {
