@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Tx.ToolBox.Wpf</id>
+    <version>1.0.2</version>
+    <title>Tx.ToolBox.Wpf</title>
+    <authors>Nikita Brizhak</authors>
+    <owners>Nikita Brizhak</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/Telliax/Tx.ToolBox/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Telliax/Tx.ToolBox</projectUrl>
+    <description>A bunch of useful WPF-related tools made for personal use</description>
+    <releaseNotes>Work in progress</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <dependencies>
+      <dependency id="Castle.Windsor" version="4.1.0" />
+      <dependency id="Tx.ToolBox" version="1.0.4" />
+      <dependency id="Blend.Interactivity.Wpf" version="1.0.1340" />
+      <dependency id="Castle.Core" version="4.2.1" />
+      <dependency id="FontAwesome.WPF" version="4.7.0.9" />
+      <dependency id="Microsoft.Tpl.Dataflow" version="4.5.24" />
+    </dependencies>
+  </metadata>
+</package>

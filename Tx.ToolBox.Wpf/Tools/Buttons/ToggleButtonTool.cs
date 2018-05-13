@@ -5,7 +5,7 @@ using Tx.ToolBox.Wpf.Templates;
 namespace Tx.ToolBox.Wpf.Tools.Buttons
 {
     [Template(typeof(ToggleButtonToolView))]
-    abstract class ToggleButtonTool : ButtonTool
+    public abstract class ToggleButtonTool : ButtonTool
     {
         public bool IsChecked
         {
