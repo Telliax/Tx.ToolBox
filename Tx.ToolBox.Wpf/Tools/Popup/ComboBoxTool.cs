@@ -25,7 +25,13 @@ namespace Tx.ToolBox.Wpf.Tools.Popup
                     new AggregateException(e).RethrowOnThreadPool();
                 }
             }
-        }        
+        }
+
+        public string StringFormat
+        {
+            get => _stringFormat;
+            set => SetField(ref _stringFormat, value);
+        }
 
         public ObservableCollection<T> Items
         {
@@ -66,5 +72,6 @@ namespace Tx.ToolBox.Wpf.Tools.Popup
         private ObservableCollection<T> _items = new ObservableCollection<T>();
         private T _selectedItem;
         private double _width = 100;
+        private string _stringFormat;
     }
 }

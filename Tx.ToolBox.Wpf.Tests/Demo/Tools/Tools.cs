@@ -164,6 +164,7 @@ namespace Tx.ToolBox.Wpf.Tests.Demo.Tools
             ToolTip = "Select one of the predefined integer values.";
             SetOptions(1,10,100);
             Width = 50;
+            StringFormat = "{0} ms";
         }
 
         protected override void OnSelectedItemChanged()

@@ -160,6 +160,7 @@
         <Setter Property="ItemsSource" Value="{Binding Items}"/>
         <Setter Property="SelectedItem" Value="{Binding SelectedItem}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemStringFormat" Value="{Binding StringFormat}"></Setter>
     </Style>
 
     <Style TargetType="popup:ComboBoxToolView" BasedOn="{StaticResource ComboBoxStyle}"/>
