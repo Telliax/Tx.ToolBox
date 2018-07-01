@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tx.ToolBox.Wpf.SampleApp;
+using Tx.ToolBox.Wpf.Tests.Demo;
 using Tx.ToolBox.Wpf.Tests.Demo.Tools;
 
 namespace Tx.ToolBox.Wpf.Tests
@@ -13,9 +14,9 @@ namespace Tx.ToolBox.Wpf.Tests
         [STAThread]
         public static void Main()
         {
-            using (var boot = new SampleBootstrap("Tx.Demo"))
+            using (var boot = new SampleBootstrap(new AppSettings()))
             {
-                boot.AddSamples(new ToolBarSample());
+                boot.AddSamples(new ToolBarSample(), new DummySample());
                 boot.Run();
             }
         }

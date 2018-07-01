@@ -18,6 +18,7 @@ namespace Tx.ToolBox.Wpf.Behaviors
             behaviors.Clear();
             foreach (Behavior behavior in array)
             {
+                behavior.Detach();
                 behaviors.Add(behavior);
             }
         }

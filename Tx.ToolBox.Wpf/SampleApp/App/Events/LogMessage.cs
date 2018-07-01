@@ -3,7 +3,7 @@ using Tx.ToolBox.Messaging;
 
 namespace Tx.ToolBox.Wpf.SampleApp.App.Events
 {
-    class LogMessage : MessageBase
+    public class LogMessage : MessageBase
     {
         public LogMessage(string message, LogMessageType type = LogMessageType.Info)
         {
@@ -22,7 +22,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.Events
         }
     }
 
-    enum LogMessageType
+    public enum LogMessageType
     {
         Info,
         Error

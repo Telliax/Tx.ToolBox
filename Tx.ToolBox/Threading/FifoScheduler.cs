@@ -7,7 +7,7 @@ using Tx.ToolBox.Helpers;
 
 namespace Tx.ToolBox.Threading
 {
-    class FifoScheduler : TaskScheduler, IDisposable
+    public class FifoScheduler : TaskScheduler, IDisposable
     {
         public FifoScheduler(int maxQueueCapacity, bool waitOnDispose = true) 
         {

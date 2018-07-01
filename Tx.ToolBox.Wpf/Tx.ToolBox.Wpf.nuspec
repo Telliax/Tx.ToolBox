@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tx.ToolBox.Wpf</id>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <title>Tx.ToolBox.Wpf</title>
     <authors>Nikita Brizhak</authors>
     <owners>Nikita Brizhak</owners>
@@ -14,11 +14,10 @@
     <copyright>Copyright 2017</copyright>
     <dependencies>
       <dependency id="Castle.Windsor" version="4.1.0" />
-      <dependency id="Tx.ToolBox" version="1.0.4" />
+      <dependency id="Tx.ToolBox" version="1.0.6" />
       <dependency id="Blend.Interactivity.Wpf" version="1.0.1340" />
       <dependency id="Castle.Core" version="4.2.1" />
       <dependency id="FontAwesome.WPF" version="4.7.0.9" />
-      <dependency id="Microsoft.Tpl.Dataflow" version="4.5.24" />
     </dependencies>
   </metadata>
 </package>

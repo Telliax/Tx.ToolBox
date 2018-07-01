@@ -15,7 +15,10 @@ namespace Tx.ToolBox.Wpf.Behaviors
 
         protected override void OnDetaching()
         {
-            AssociatedObject.PreviewKeyDown -= OnKeyPressed;
+            if (AssociatedObject != null)
+            {
+                AssociatedObject.PreviewKeyDown -= OnKeyPressed;
+            }
             base.OnDetaching();
         }
 

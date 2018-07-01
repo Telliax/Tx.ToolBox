@@ -34,7 +34,10 @@ namespace Tx.ToolBox.Wpf.Behaviors
 
         protected override void OnDetaching()
         {
-            BindingOperations.ClearBinding(AssociatedObject, UIElement.OpacityProperty);
+            if (AssociatedObject != null)
+            {
+                BindingOperations.ClearBinding(AssociatedObject, UIElement.OpacityProperty);
+            }
             base.OnDetaching();
         }
 

@@ -20,7 +20,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
             _container = container;
             _messenger = messenger;
             Samples = new ObservableCollection<SampleViewModel>(samples.Select(s => new SampleViewModel(s)));
-            _scheduler = new RunLatestScheduler();
+            _scheduler = new FifoScheduler(100);
         }
 
         public bool IsLoading => _loadingFlag.IsSet; 
@@ -42,7 +42,7 @@ namespace Tx.ToolBox.Wpf.SampleApp.App.List
         private readonly IWindsorContainer _container;
         private readonly IMessenger _messenger;
         private readonly Flag _loadingFlag = new Flag();
-        private readonly RunLatestScheduler _scheduler;
+        private readonly FifoScheduler _scheduler;
         private SampleViewModel _selectedSample;
 
         private async void ChangeSampleAsync(SampleViewModel sample)

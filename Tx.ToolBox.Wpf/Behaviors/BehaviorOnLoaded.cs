@@ -24,11 +24,14 @@ namespace Tx.ToolBox.Wpf.Behaviors
 
         protected override void OnDetaching()
         {
-            AssociatedObject.Loaded -= OnLoaded;
-            AssociatedObject.Unloaded -= OnUnloaded;
-            if (AssociatedObject.IsLoaded)
+            if (AssociatedObject != null)
             {
-                Unload();
+                AssociatedObject.Loaded -= OnLoaded;
+                AssociatedObject.Unloaded -= OnUnloaded;
+                if (AssociatedObject.IsLoaded)
+                {
+                    Unload();
+                }
             }
             base.OnDetaching();
         }
